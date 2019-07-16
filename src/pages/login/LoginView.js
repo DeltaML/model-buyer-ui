@@ -10,7 +10,7 @@ const Login = ({classes, ...props}) => (
     <Grid container className={classes.container}>
         <div className={classes.logotypeContainer}>
             <img src={logo} alt="logo" className={classes.logotypeImage}/>
-            <Typography className={classes.logotypeText}>Material Admin</Typography>
+            <Typography className={classes.logotypeText}>Delta ML</Typography>
         </div>
         <div className={classes.formContainer}>
             <div className={classes.form}>
@@ -22,26 +22,22 @@ const Login = ({classes, ...props}) => (
                     centered
                 >
                     <Tab label="Login" classes={{root: classes.tab}}/>
-                    <Tab label="New User" classes={{root: classes.tab}}/>
+                    {/*<Tab label="New User" classes={{root: classes.tab}}/>*/}
                 </Tabs>
                 {props.activeTabId === 0 && (
                     <React.Fragment>
                         <Typography variant="h1" className={classes.greeting}>
-                            Good Morning, User
+                            Hello, User
                         </Typography>
-                        {/*<Button size="large" className={classes.googleButton}>
-              <img src={google} alt="google" className={classes.googleIcon} />
-              &nbsp;Sign in with Google
-            </Button>*/}
                         <GoogleLogin
                             className={classes.googleButton}
                             clientId="334168139568-v83065ekhqqkd4ieppo2jjb4aqbdk5o8.apps.googleusercontent.com"
-                            buttonText="&nbsp;Login"
+                            buttonText="&nbsp;Sign in with Google"
                             onSuccess={props.handleGoogleLoginButtonClick}
                             onFailure={props.handleGoogleLoginButtonClick}
                             cookiePolicy={'single_host_origin'}
                         />
-                        <div className={classes.formDividerContainer}>
+                        {/*<div className={classes.formDividerContainer}>
                             <div className={classes.formDivider}/>
                             <Typography className={classes.formDividerWord}>or</Typography>
                             <div className={classes.formDivider}/>
@@ -105,7 +101,7 @@ const Login = ({classes, ...props}) => (
                             >
                                 Forget Password
                             </Button>
-                        </div>
+                        </div>*/}
                     </React.Fragment>
                 )}
                 {props.activeTabId === 1 && (
@@ -218,7 +214,7 @@ const Login = ({classes, ...props}) => (
                 )}
             </div>
             <Typography color="primary" className={classes.copyright}>
-                © 2014-2019 Flatlogic, LLC. All rights reserved.
+                © Delta ML. All rights reserved.
             </Typography>
         </div>
     </Grid>

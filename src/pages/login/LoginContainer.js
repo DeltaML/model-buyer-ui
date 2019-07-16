@@ -40,8 +40,7 @@ export default compose(
       props.loginUser(props.loginValue, props.passwordValue);
     },
     handleGoogleLoginButtonClick: props => (response) => {
-      console.log(response);
-      props.loginUser(response.profileObj.email, response.profileObj.email);
+      props.loginUser(response.tokenId);
     }
   }),
   lifecycle({
