@@ -28,36 +28,12 @@ export const resetError = () => ({
 });
 
 
-/*export const loginUser = (tokenId) => async dispatch => {
-
-    dispatch(startLogin());
-
-    if (tokenId) {
-        try {
-            // TODO agrojas: use config host
-            const success = await fetch('http://localhost:9090/users/login', {
-                method: 'POST',
-                headers: {'Content-Type': 'application/json'},
-                body: JSON.stringify({token: tokenId}),
-            });
-            console.log(success);
-            dispatch(loginSuccess());
-            return success;
-        } catch (error) {
-            dispatch(loginFailure());
-            return error;
-        }
-    } else {
-        dispatch(loginFailure());
-    }
-};*/
-
-
 export const loginUser = (tokenId) => dispatch => {
 
     dispatch(startLogin());
 
     if (tokenId) {
+         // TODO agrojas: use config host
         fetch('http://localhost:9090/users/login', {
                 method: 'POST',
                 headers: {'Content-Type': 'application/json'},
