@@ -10,7 +10,7 @@ const Login = ({classes, ...props}) => (
     <Grid container className={classes.container}>
         <div className={classes.logotypeContainer}>
             <img src={logo} alt="logo" className={classes.logotypeImage}/>
-            <Typography className={classes.logotypeText}>Material Admin</Typography>
+            <Typography className={classes.logotypeText}>Delta ML</Typography>
         </div>
         <div className={classes.formContainer}>
             <div className={classes.form}>
@@ -22,90 +22,21 @@ const Login = ({classes, ...props}) => (
                     centered
                 >
                     <Tab label="Login" classes={{root: classes.tab}}/>
-                    <Tab label="New User" classes={{root: classes.tab}}/>
                 </Tabs>
                 {props.activeTabId === 0 && (
                     <React.Fragment>
                         <Typography variant="h1" className={classes.greeting}>
-                            Good Morning, User
+                            Hello, User
                         </Typography>
-                        {/*<Button size="large" className={classes.googleButton}>
-              <img src={google} alt="google" className={classes.googleIcon} />
-              &nbsp;Sign in with Google
-            </Button>*/}
                         <GoogleLogin
                             className={classes.googleButton}
                             clientId="334168139568-v83065ekhqqkd4ieppo2jjb4aqbdk5o8.apps.googleusercontent.com"
-                            buttonText="&nbsp;Login"
+                            buttonText="&nbsp;Sign in with Google"
                             onSuccess={props.handleGoogleLoginButtonClick}
                             onFailure={props.handleGoogleLoginButtonClick}
                             cookiePolicy={'single_host_origin'}
                         />
-                        <div className={classes.formDividerContainer}>
-                            <div className={classes.formDivider}/>
-                            <Typography className={classes.formDividerWord}>or</Typography>
-                            <div className={classes.formDivider}/>
-                        </div>
-                        <Fade in={props.error}>
-                            <Typography color="secondary" className={classes.errorMessage}>
-                                Something is wrong with your login or password :(
-                            </Typography>
-                        </Fade>
-                        <TextField
-                            id="email"
-                            InputProps={{
-                                classes: {
-                                    underline: classes.textFieldUnderline,
-                                    input: classes.textField
-                                }
-                            }}
-                            value={props.loginValue}
-                            onChange={e => props.handleInput(e, "login")}
-                            margin="normal"
-                            placeholder="Email Adress"
-                            type="email"
-                            fullWidth
-                        />
-                        <TextField
-                            id="password"
-                            InputProps={{
-                                classes: {
-                                    underline: classes.textFieldUnderline,
-                                    input: classes.textField
-                                }
-                            }}
-                            value={props.passwordValue}
-                            onChange={e => props.handleInput(e, "password")}
-                            margin="normal"
-                            placeholder="Password"
-                            type="password"
-                            fullWidth
-                        />
-                        <div className={classes.formButtons}>
-                            {props.isLoading ? (
-                                <CircularProgress size={26} className={classes.loginLoader}/>
-                            ) : (
-                                <Button
-                                    disabled={
-                                        props.loginValue.length === 0 ||
-                                        props.passwordValue.length === 0
-                                    }
-                                    onClick={props.handleLoginButtonClick}
-                                    variant="contained"
-                                    color="primary"
-                                    size="large"
-                                >
-                                    Login
-                                </Button>
-                            )}
-                            <Button
-                                color="primary"
-                                size="large"
-                                className={classes.forgetButton}
-                            >
-                                Forget Password
-                            </Button>
-                        </div>
+
                     </React.Fragment>
                 )}
                 {props.activeTabId === 1 && (
@@ -192,16 +123,7 @@ const Login = ({classes, ...props}) => (
                             <Typography className={classes.formDividerWord}>or</Typography>
                             <div className={classes.formDivider}/>
                         </div>
-                        {/*<Button
-              size="large"
-              className={classnames(
-                classes.googleButton,
-                classes.googleButtonCreating
-              )}
-            >
-              <img src={google} alt="google" className={classes.googleIcon} />
-              &nbsp;Sign in with Google
-            </Button>*/}
+
                         <GoogleLogin
                             size="large"
                             className={classnames(
@@ -218,7 +140,7 @@ const Login = ({classes, ...props}) => (
                 )}
             </div>
             <Typography color="primary" className={classes.copyright}>
-                © 2014-2019 Flatlogic, LLC. All rights reserved.
+                © Delta ML. All rights reserved.
             </Typography>
         </div>
     </Grid>
