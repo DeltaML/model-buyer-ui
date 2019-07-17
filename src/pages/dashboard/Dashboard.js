@@ -77,43 +77,30 @@ const PieChartData = [
   { name: "Group D", value: 200, color: "success" }
 ];
 
+
+
+
 const Dashboard = ({ classes, theme, ...props }) => {
   return (
     <React.Fragment>
-      <PageTitle title="Dashboard" button="Latest Reports" />
+      <PageTitle title="Home" button="New Model" />
       <Grid container spacing={32}>
-        <Grid item lg={3} md={4} sm={6} xs={12}>
+        {mock.MockModels.map(model => (
+
+
+                    <Grid item lg={3} md={4} sm={6} xs={12}>
           <Widget
-            title="Visits Today"
+            title={model.name}
             upperTitle
             bodyClass={classes.fullHeightBody}
             className={classes.card}
           >
             <div className={classes.visitsNumberContainer}>
               <Typography size="xl" weight="medium">
-                12, 678
+                {model.status}
               </Typography>
-              <LineChart
-                width={55}
-                height={30}
-                data={[
-                  { value: 10 },
-                  { value: 15 },
-                  { value: 10 },
-                  { value: 17 },
-                  { value: 18 }
-                ]}
-                margin={{ left: theme.spacing.unit * 2 }}
-              >
-                <Line
-                  type="natural"
-                  dataKey="value"
-                  stroke={theme.palette.success.main}
-                  strokeWidth={2}
-                  dot={false}
-                />
-              </LineChart>
             </div>
+
             <Grid
               container
               direction="row"
@@ -121,21 +108,24 @@ const Dashboard = ({ classes, theme, ...props }) => {
               alignItems="center"
             >
               <Grid item>
-                <Typography color="textSecondary">Registrations</Typography>
-                <Typography size="md">860</Typography>
+                <Typography color="textSecondary">Improvement</Typography>
+                <Typography size="md">{model.improvement}%</Typography>
               </Grid>
               <Grid item>
-                <Typography color="textSecondary">Sign Out</Typography>
-                <Typography size="md">32</Typography>
+                <Typography color="textSecondary">Iterations</Typography>
+                <Typography size="md">{model.iterations}</Typography>
               </Grid>
               <Grid item>
-                <Typography color="textSecondary">Rate</Typography>
-                <Typography size="md">3.25%</Typography>
+                <Typography color="textSecondary">Cost</Typography>
+                <Typography size="md">${model.cost}</Typography>
               </Grid>
+
             </Grid>
           </Widget>
         </Grid>
-        <Grid item lg={3} md={8} sm={6} xs={12}>
+        ))}
+
+        {/*<Grid item lg={3} md={8} sm={6} xs={12}>
           <Widget
             title="App Performance"
             upperTitle
@@ -193,8 +183,8 @@ const Dashboard = ({ classes, theme, ...props }) => {
               />
             </div>
           </Widget>
-        </Grid>
-        <Grid item lg={3} md={8} sm={6} xs={12}>
+        </Grid>*/}
+        {/*<Grid item lg={3} md={8} sm={6} xs={12}>
           <Widget
             title="Server Overview"
             upperTitle
@@ -308,8 +298,8 @@ const Dashboard = ({ classes, theme, ...props }) => {
               </Grid>
             </Grid>
           </Widget>
-        </Grid>
-        <Grid item xs={12}>
+        </Grid>*/}
+{/*        <Grid item xs={12}>
           <Widget
             bodyClass={classes.mainChartBody}
             header={
@@ -395,13 +385,13 @@ const Dashboard = ({ classes, theme, ...props }) => {
               </ComposedChart>
             </ResponsiveContainer>
           </Widget>
-        </Grid>
-        {mock.bigStat.map(stat => (
+        </Grid>*/}
+   {/*     {mock.bigStat.map(stat => (
           <Grid item md={4} sm={6} xs={12} key={stat.product}>
             <BigStat {...stat} />
           </Grid>
-        ))}
-        <Grid item xs={12}>
+        ))}*/}
+{/*        <Grid item xs={12}>
           <Widget
             title="Support Requests"
             upperTitle
@@ -410,7 +400,7 @@ const Dashboard = ({ classes, theme, ...props }) => {
           >
             <Table data={mock.table} />
           </Widget>
-        </Grid>
+        </Grid>*/}
       </Grid>
     </React.Fragment>
   );

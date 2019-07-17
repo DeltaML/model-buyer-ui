@@ -178,5 +178,10 @@ export default {
       city: "Hanoverton",
       status: "Sent"
     }
+  ],
+    MockModels :[
+    { id: "ee973860-121b-49f0-84bd-06e3e5314ed8", name: "Model 1", status: "Trained", improvement: 10, iterations: 10, cost: 10 },
+    { id: "ee973860-121b-49f0-84bd-06e3e5314ed8", name: "Model 2", status: "Finished", improvement: 20, iterations: 10, cost: 10 },
+    { id: "ee973860-121b-49f0-84bd-06e3e5314ed8", name: "Model 3", status: "Paused", improvement: 30, iterations: 10, cost: 10 }
   ]
 };
