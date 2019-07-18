@@ -1,3 +1,5 @@
+import {post} from '../../utils/apiUtilities';
+
 export const initialState = {
     isLoading: false,
     isAuthenticated: !!localStorage.getItem("id_token"),
@@ -28,26 +30,19 @@ export const resetError = () => ({
 });
 
 
-export const loginUser = (tokenId) => dispatch => {
+export const loginUser = (tokenId) => async dispatch => {
 
     dispatch(startLogin());
 
     if (tokenId) {
-         // TODO agrojas: use config host
-        fetch('http://localhost:9090/users/login', {
-                method: 'POST',
-                headers: {'Content-Type': 'application/json'},
-                body: JSON.stringify({token: tokenId}),
-            })
-            .then(function(response) {
-              localStorage.setItem("id_token", tokenId);
-                dispatch(loginSuccess());
-            return response;
-            })
-            .catch(function (error) {
-                 dispatch(loginFailure());
-            return error;
-            })
+        try {
+            const userLoginResponse = await post("users/login", {token: tokenId});
+            localStorage.setItem("id_token", userLoginResponse.token);
+            localStorage.setItem("user_id", userLoginResponse.id);
+            dispatch(loginSuccess());
+        } catch (e) {
+            dispatch(loginFailure());
+        }
     } else {
         dispatch(loginFailure());
     }
