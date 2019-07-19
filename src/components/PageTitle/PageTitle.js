@@ -1,6 +1,7 @@
 import React from "react";
 import { Button, withStyles } from "@material-ui/core";
 import { Typography } from "../Wrappers";
+import { Link } from "react-router-dom";
 
 const PageTitle = ({ classes, ...props }) => (
   <div className={classes.pageTitleContainer}>
@@ -13,8 +14,10 @@ const PageTitle = ({ classes, ...props }) => (
         variant="contained"
         size="large"
         color="secondary"
+        component={Link} to={props.buttonTo}
       >
-        {props.button}
+          {props.button}
+
       </Button>
     )}
   </div>
@@ -36,7 +39,7 @@ const styles = theme => ({
     '&:active' : {
       boxShadow: theme.customShadows.widgetWide,
     },
-  },
+  }
 });
 
 export default withStyles(styles)(PageTitle);

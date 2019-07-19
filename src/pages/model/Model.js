@@ -1,66 +1,87 @@
 import React from "react";
-import {Grid, withStyles,CircularProgress,} from "@material-ui/core";
-import Widget from "../../components/Widget";
+import {Button, Grid, InputLabel, MenuItem, Select, withStyles} from "@material-ui/core";
 import PageTitle from "../../components/PageTitle";
 import {Typography} from "../../components/Wrappers";
 
-const Home = ({classes, theme, ...props}) => {
+const handleChange = () => {
+    console.log("Change")
+};
+
+
+const Model = ({classes, theme, ...props}) => {
 
     return (
 
         <React.Fragment>
-            <PageTitle title="Home" button="New Model" buttonTo="/app/model"/>
+            <PageTitle title="Create New Model"/>
             <Grid container spacing={32}>
-                {props.isLoading ? (
-                    <CircularProgress size={26}/>
-                ) : (
-                    props.models.map(model => (
-                            <Grid item lg={3} md={4} sm={6} xs={12}>
-                                <Widget
-                                    title={model.name}
-                                    upperTitle
-                                    bodyClass={classes.fullHeightBody}
-                                    className={classes.card}
-                                >
-                                    <div className={classes.visitsNumberContainer}>
-                                        <Typography size="xl" weight="medium">
-                                            {model.status}
-                                        </Typography>
-                                    </div>
+                <Grid item lg={3} md={4} sm={6} xs={12}>
 
-                                    <Grid
-                                        container
-                                        direction="row"
-                                        justify="space-between"
-                                        alignItems="center"
-                                    >
-                                        <Grid item>
-                                            <Typography color="textSecondary">Improvement</Typography>
-                                            <Typography size="md">{model.improvement}%</Typography>
-                                        </Grid>
-                                        <Grid item>
-                                            <Typography color="textSecondary">Iterations</Typography>
-                                            <Typography size="md">{model.iterations}</Typography>
-                                        </Grid>
-                                        <Grid item>
-                                            <Typography color="textSecondary">Cost</Typography>
-                                            <Typography size="md">${model.cost}</Typography>
-                                        </Grid>
+                    <Typography color="textSecondary">Model Requirements</Typography>
+                    <Grid
+                        container
+                        direction="row"
+                        justify="space-between"
+                        alignItems="center"
+                    >
+                        <Grid item>
+                            <InputLabel htmlFor="model-type">Model Type</InputLabel>
+                            <Select
+                                value={props.modelType}
+                                onChange={handleChange}
+                                inputProps={{
+                                    name: 'modelType',
+                                    id: 'model-type',
+                                }}
+                            >
+                                {(props.modelTypes.map(modelType => (
+                                    <MenuItem value={modelType}>{modelType}</MenuItem>
+                                )))}
 
-                                    </Grid>
-                                </Widget>
-                            </Grid>
-                        )
-                    )
-                )}
+                            </Select>
+                        </Grid>
+                        <Grid item>
+                            <Typography color="textSecondary">Iterations</Typography>
+                            <Typography size="md">2</Typography>
+                        </Grid>
+                        <Grid item>
+                            <Typography color="textSecondary">Cost</Typography>
+                            <Typography size="md">$2</Typography>
+                        </Grid>
+                        <Grid item>
+                            <input
+                                accept="image/*"
+                                className={classes.input}
+                                id="contained-button-file"
+                                multiple
+                                type="file"
+                            />
+                            <label htmlFor="contained-button-file">
+                                <Button variant="contained" component="span" className={classes.upLoadButton}>
+                                    Upload Dataset
+                                </Button>
+                            </label>
+                        </Grid>
 
+                    </Grid>
 
+                </Grid>
             </Grid>
         </React.Fragment>
     );
 };
 
 const styles = theme => ({
+    input: {
+        display: 'none',
+    },
+    upLoadButton: {
+        boxShadow: theme.customShadows.widget,
+        textTransform: 'none',
+        '&:active': {
+            boxShadow: theme.customShadows.widgetWide,
+        },
+    },
     card: {
         minHeight: "100%",
         display: "flex",
@@ -174,4 +195,4 @@ const styles = theme => ({
     }
 });
 
-export default withStyles(styles, {withTheme: true})(Home);
+export default withStyles(styles, {withTheme: true})(Model);
