@@ -4,8 +4,8 @@ import MUIDataTable from "mui-datatables";
 
 import PageTitle from '../../components/PageTitle';
 import Widget from '../../components/Widget';
-import Table from '../dashboard/components/Table/Table';
-import mock from '../dashboard/mock'; 
+import Table from '../home/components/Table/Table';
+import mock from '../home/mock';
 
 const datatableData = [
  ["Joe James", "Example Inc.", "Yonkers", "NY"],

@@ -103,7 +103,7 @@ const Header = ({ classes, isSidebarOpened, toggleSidebar, ...props }) => (
           />
         )}
       </IconButton>
-      <Typography variant="h6" weight="medium" className={classes.logotype}>React Material Admin</Typography>
+      <Typography variant="h6" weight="medium" className={classes.logotype}>Model Buyer</Typography>
       <div className={classes.grow} />
       <div
         className={classNames(classes.search, {
@@ -126,7 +126,7 @@ const Header = ({ classes, isSidebarOpened, toggleSidebar, ...props }) => (
           }}
         />
       </div>
-      <IconButton
+      {/*<IconButton
         color="inherit"
         aria-haspopup="true"
         aria-controls="mail-menu"
@@ -141,8 +141,8 @@ const Header = ({ classes, isSidebarOpened, toggleSidebar, ...props }) => (
         >
           <NotificationsIcon classes={{ root: classes.headerIcon }} />
         </Badge>
-      </IconButton>
-      <IconButton
+      </IconButton>*/}
+     {/* <IconButton
         color="inherit"
         aria-haspopup="true"
         aria-controls="mail-menu"
@@ -155,7 +155,7 @@ const Header = ({ classes, isSidebarOpened, toggleSidebar, ...props }) => (
         >
           <MailIcon classes={{ root: classes.headerIcon }} />
         </Badge>
-      </IconButton>
+      </IconButton>*/}
       <IconButton
         aria-haspopup="true"
         color="inherit"
