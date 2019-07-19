@@ -7,9 +7,9 @@ export const initialState = {
 };
 
 
-export const FETCHING_HOME_PENDING = "Dashboard/FETCHING_HOME_PENDING";
-export const FETCHING_HOME_SUCCESS = "Dashboard/FETCHING_HOME_SUCCESS";
-export const FETCHING_HOME_ERROR = "Dashboard/FETCHING_HOME_ERROR";
+export const FETCHING_HOME_PENDING = "Home/FETCHING_HOME_PENDING";
+export const FETCHING_HOME_SUCCESS = "Home/FETCHING_HOME_SUCCESS";
+export const FETCHING_HOME_ERROR = "Home/FETCHING_HOME_ERROR";
 
 export const fetchingHomeDataPending = () => ({
     type: FETCHING_HOME_PENDING
@@ -42,7 +42,7 @@ export const fetchingHomeData = () => async dispatch => {
 }
 
 
-export default function DashboardReducer(state = initialState, action) {
+export default function HomeReducer(state = initialState, action) {
     switch (action.type) {
         case FETCHING_HOME_PENDING:
             return {
@@ -62,7 +62,8 @@ export default function DashboardReducer(state = initialState, action) {
             return {
                 ...state,
                 isLoading: false,
-                error: action.error
+                error: action.error,
+                models:[]
             };
         default:
             return state;

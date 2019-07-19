@@ -126,7 +126,7 @@ const Header = ({ classes, isSidebarOpened, toggleSidebar, ...props }) => (
           }}
         />
       </div>
-      <IconButton
+      {/*<IconButton
         color="inherit"
         aria-haspopup="true"
         aria-controls="mail-menu"
@@ -141,8 +141,8 @@ const Header = ({ classes, isSidebarOpened, toggleSidebar, ...props }) => (
         >
           <NotificationsIcon classes={{ root: classes.headerIcon }} />
         </Badge>
-      </IconButton>
-      <IconButton
+      </IconButton>*/}
+     {/* <IconButton
         color="inherit"
         aria-haspopup="true"
         aria-controls="mail-menu"
@@ -155,7 +155,7 @@ const Header = ({ classes, isSidebarOpened, toggleSidebar, ...props }) => (
         >
           <MailIcon classes={{ root: classes.headerIcon }} />
         </Badge>
-      </IconButton>
+      </IconButton>*/}
       <IconButton
         aria-haspopup="true"
         color="inherit"

@@ -2,10 +2,10 @@ import { combineReducers } from 'redux';
 
 import layout from '../components/Layout/LayoutState';
 import login from '../pages/login/LoginState';
-import dashboard from '../pages/dashboard/DashboardState';
+import home from '../pages/home/HomeState';
 
 export default combineReducers({
   layout,
   login,
-  dashboard
+  home
 });

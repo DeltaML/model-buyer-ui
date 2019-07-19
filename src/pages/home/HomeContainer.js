@@ -1,16 +1,16 @@
 import {compose, lifecycle, withHandlers, withState} from "recompose";
 
-import DashboardView from "./Dashboard";
+import HomeView from "./Home";
 import {connect} from "react-redux";
-import {fetchingHomeData} from "../dashboard/DashboardState";
+import {fetchingHomeData} from "../home/HomeState";
 
 
 export default compose(
     connect(
         state => ({
-            isLoading: state.dashboard.isLoading,
-            models: state.dashboard.models,
-            error: state.dashboard.error
+            isLoading: state.home.isLoading,
+            models: state.home.models,
+            error: state.home.error
         }),
         {fetchingHomeData}
     ),
@@ -21,4 +21,4 @@ export default compose(
       this.props.fetchingHomeData()
     }
   }),
-)(DashboardView);
+)(HomeView);

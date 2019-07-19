@@ -53,7 +53,7 @@ const PieChartData = [
 
 
 
-const Dashboard = ({classes, theme, ...props}) => {
+const Home = ({classes, theme, ...props}) => {
 
     return (
 
@@ -223,4 +223,4 @@ const styles = theme => ({
     }
 });
 
-export default withStyles(styles, {withTheme: true})(Dashboard);
+export default withStyles(styles, {withTheme: true})(Home);
