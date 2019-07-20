@@ -1,4 +1,4 @@
-import {get} from "../../utils/apiUtilities";
+import {get} from "../../utils/ApiUtilities";
 
 export const initialState = {
     isLoading: false,

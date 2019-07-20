@@ -1,12 +1,11 @@
 import React from "react";
-import {Button, Grid, InputLabel, MenuItem, Select, withStyles} from "@material-ui/core";
+import {Button, FormControl, Grid, Input, InputLabel, MenuItem, Select, withStyles} from "@material-ui/core";
+import Fab from '@material-ui/core/Fab';
+import Widget from "../../components/Widget";
 import PageTitle from "../../components/PageTitle";
+import AddIcon from '@material-ui/icons/Add';
+import CloudUploadIcon from '@material-ui/icons/CloudUpload';
 import {Typography} from "../../components/Wrappers";
-
-const handleChange = () => {
-    console.log("Change")
-};
-
 
 const Model = ({classes, theme, ...props}) => {
 
@@ -16,62 +15,159 @@ const Model = ({classes, theme, ...props}) => {
             <PageTitle title="Create New Model"/>
             <Grid container spacing={32}>
                 <Grid item lg={3} md={4} sm={6} xs={12}>
-
-                    <Typography color="textSecondary">Model Requirements</Typography>
-                    <Grid
-                        container
-                        direction="row"
-                        justify="space-between"
-                        alignItems="center"
+                    <Widget
+                        upperTitle
+                        title="Model Type"
+                        bodyClass={classes.fullHeightBody}
+                        className={classes.card}
                     >
-                        <Grid item>
-                            <InputLabel htmlFor="model-type">Model Type</InputLabel>
-                            <Select
-                                value={props.modelType}
-                                onChange={handleChange}
-                                inputProps={{
-                                    name: 'modelType',
-                                    id: 'model-type',
-                                }}
-                            >
-                                {(props.modelTypes.map(modelType => (
-                                    <MenuItem value={modelType}>{modelType}</MenuItem>
-                                )))}
+                        <Grid
+                            container
+                            direction="row"
+                            justify="space-between"
+                            alignItems="center"
+                        >
+                            <Grid item>
+                                <InputLabel htmlFor="model-type">Model Type</InputLabel>
+                                <Select
 
-                            </Select>
-                        </Grid>
-                        <Grid item>
-                            <Typography color="textSecondary">Iterations</Typography>
-                            <Typography size="md">2</Typography>
-                        </Grid>
-                        <Grid item>
-                            <Typography color="textSecondary">Cost</Typography>
-                            <Typography size="md">$2</Typography>
-                        </Grid>
-                        <Grid item>
-                            <input
-                                accept="image/*"
-                                className={classes.input}
-                                id="contained-button-file"
-                                multiple
-                                type="file"
-                            />
-                            <label htmlFor="contained-button-file">
-                                <Button variant="contained" component="span" className={classes.upLoadButton}>
-                                    Upload Dataset
-                                </Button>
-                            </label>
-                        </Grid>
+                                    value={props.selectedModelType}
+                                    onChange={e => props.handleSelect(e)}
 
-                    </Grid>
+                                >
+                                    {(props.modelTypes.map(modelType => (
+                                        <MenuItem id={modelType} value={modelType}>{modelType}</MenuItem>
+                                    )))}
 
+                                </Select>
+
+                            </Grid>
+                            <Grid item>
+                                <FormControl className={classes.formControl}>
+                                    <input
+                                        accept="*/*"
+                                        className={classes.input}
+                                        id="contained-button-file"
+                                        multiple
+                                        type="file"
+                                        onChange={e => props.handleUploadFile(e)}
+                                    />
+                                    <label htmlFor="contained-button-file">
+                                        <Button variant="contained" component="span" className={classes.upLoadButton}
+                                        >
+                                            Upload
+                                            <CloudUploadIcon className={classes.rightIcon}/>
+                                        </Button>
+                                    </label>
+                                    <Typography size="m" weight="medium"> {props.fileName}</Typography>
+
+                                </FormControl>
+
+                            </Grid>
+
+
+                        </Grid>
+                    </Widget>
                 </Grid>
+                <Grid item lg={3} md={4} sm={6} xs={12}>
+                    <Widget
+                        title="Features"
+                        upperTitle
+                        bodyClass={classes.fullHeightBody}
+                        className={classes.card}
+                    >
+
+
+                        <Grid
+                            container
+                            direction="row"
+                            justify="space-between"
+                            alignItems="center"
+                        >
+                            <Grid item>
+                                <FormControl className={classes.formControl}>
+                                    <InputLabel htmlFor="features-list">List</InputLabel>
+                                    <Input id="features-list" value={props.features.list}
+                                           onChange={e => props.handleInput("features", "list", e)}/>
+                                </FormControl>
+                            </Grid>
+                            <Grid item>
+                                <FormControl className={classes.formControl}>
+                                    <InputLabel htmlFor="features-range">Range</InputLabel>
+                                    <Input id="features-range" value={props.features.range}
+                                           onChange={e => props.handleInput("features", "range", e)}/>
+                                </FormControl>
+                            </Grid>
+                            <Grid item>
+                                <FormControl className={classes.formControl}>
+                                    <InputLabel htmlFor="features-preProcessing">Pre Processing</InputLabel>
+                                    <Input id="features-preProcessing" value={props.features.pre_processing}
+                                           onChange={e => props.handleInput("features", "pre_processing", e)}/>
+                                </FormControl>
+                            </Grid>
+                            <Grid item>
+                                <FormControl className={classes.formControl}>
+                                    <InputLabel htmlFor="features-desc">Desc</InputLabel>
+                                    <Input id="features-desc" value={props.features.desc}
+                                           onChange={e => props.handleInput("features", "desc", e)}/>
+                                </FormControl>
+                            </Grid>
+
+                        </Grid>
+                    </Widget>
+                </Grid>
+
+                <Grid item lg={3} md={4} sm={6} xs={12}>
+                    <Widget
+                        title="Target"
+                        upperTitle
+                        bodyClass={classes.fullHeightBody}
+                        className={classes.card}
+                    >
+
+
+                        <Grid
+                            container
+                            direction="row"
+                            justify="space-between"
+                            alignItems="center"
+                        >
+                            <Grid item>
+                                <FormControl className={classes.formControl}>
+                                    <InputLabel htmlFor="target-range">Range</InputLabel>
+                                    <Input id="target-range" value={props.target.range}
+                                           onChange={e => props.handleInput("target", "range", e)}/>
+                                </FormControl>
+                            </Grid>
+                            <Grid item>
+                                <FormControl className={classes.formControl}>
+                                    <InputLabel htmlFor="target-desc">Desc</InputLabel>
+                                    <Input id="target-desc" value={props.features.desc}
+                                           onChange={e => props.handleInput("target", "desc", e)}/>
+                                </FormControl>
+                            </Grid>
+
+                        </Grid>
+                    </Widget>
+                </Grid>
+                <div>
+                    <Fab color="primary" aria-label="Add" className={classes.fab} onClick={props.handleCreateModel}>
+                        <AddIcon/>
+                    </Fab>
+                </div>
+
+
             </Grid>
         </React.Fragment>
     );
 };
 
 const styles = theme => ({
+    fab: {
+        position: 'absolute',
+        bottom: theme.spacing.unit * 10,
+        right: theme.spacing.unit * 10,
+    },
     input: {
         display: 'none',
     },
@@ -192,7 +288,10 @@ const styles = theme => ({
     mainChartLegentElement: {
         fontSize: '18px !important',
         marginLeft: theme.spacing.unit,
-    }
+    },
+    rightIcon: {
+        marginLeft: theme.spacing.unit,
+    },
 });
 
 export default withStyles(styles, {withTheme: true})(Model);
