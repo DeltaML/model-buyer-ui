@@ -9,7 +9,7 @@ const Home = ({classes, theme, ...props}) => {
     return (
 
         <React.Fragment>
-            <PageTitle title="Home" button="New Model" buttonTo="/app/model"/>
+            <PageTitle title="Home" button="New Model" buttonTo="/app/newModel"/>
             <Grid container spacing={32}>
                 {props.isLoading ? (
                     <CircularProgress size={26}/>

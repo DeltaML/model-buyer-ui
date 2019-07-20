@@ -1,23 +1,23 @@
 import {compose, withHandlers} from "recompose";
 import {withRouter} from "react-router-dom";
-import ModelView from "./Model";
+import NewModelView from "./NewModel";
 import {connect} from "react-redux";
-import {createModel, selectModelType,setInputValues, uploadFile} from "../model/ModelState";
+import {createModel, selectModelType,setInputValues, uploadFile} from "../newModel/NewModelState";
 
 
 
 export default compose(
     connect(
         state => ({
-            selectedModelType: state.model.selectedModelType,
-            target: state.model.target,
-            features: state.model.features,
-            modelTypes: state.model.modelTypes,
-            model: state.model.model,
-            error: state.model.error,
-            file: state.model.file,
-            fileName: state.model.fileName,
-            payment_requirements: state.model.payment_requirements
+            selectedModelType: state.newModel.selectedModelType,
+            target: state.newModel.target,
+            features: state.newModel.features,
+            modelTypes: state.newModel.modelTypes,
+            model: state.newModel.model,
+            error: state.newModel.error,
+            file: state.newModel.file,
+            fileName: state.newModel.fileName,
+            payment_requirements: state.newModel.payment_requirements
         }),
         {selectModelType, createModel, setInputValues, uploadFile}
     ),
@@ -37,4 +37,4 @@ export default compose(
         }
     }),
 
-)(ModelView);
+)(NewModelView);

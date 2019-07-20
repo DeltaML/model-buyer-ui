@@ -7,7 +7,7 @@ import AddIcon from '@material-ui/icons/Add';
 import CloudUploadIcon from '@material-ui/icons/CloudUpload';
 import {Typography} from "../../components/Wrappers";
 
-const Model = ({classes, theme, ...props}) => {
+const NewModel = ({classes, theme, ...props}) => {
 
     return (
 
@@ -327,4 +327,4 @@ const styles = theme => ({
     },
 });
 
-export default withStyles(styles, {withTheme: true})(Model);
+export default withStyles(styles, {withTheme: true})(NewModel);

@@ -52,9 +52,9 @@ const App = () => (
       <Switch>
         <Route exact path="/" render={() => <Redirect to="/app/home" />} />
         <Route exact path="/app" render={() => <Redirect to="/app/home" />} />
-        <Route exact path="/app/model" render={() => <Redirect to="/app/model" />} />
+        <Route exact path="/app/newModel" render={() => <Redirect to="/app/newModel" />} />
         <PrivateRoute path="/app" component={Layout} />
-        <PrivateRoute path="/app/model" component={Layout} />
+        <PrivateRoute path="/app/newModel" component={Layout} />
         <PublicRoute path="/login" component={Login} />
         <Route component={Error} />
       </Switch>
