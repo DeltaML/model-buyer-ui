@@ -1,5 +1,5 @@
 {
-  "name": "flatlogic-material",
+  "name": "model-buyer-ui",
   "version": "1.0.0",
   "dependencies": {
     "@material-ui/core": "^3.9.2",
