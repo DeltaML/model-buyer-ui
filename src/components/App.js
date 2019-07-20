@@ -50,9 +50,11 @@ const App = () => (
   <MuiThemeProvider theme={theme}>
     <BrowserRouter>
       <Switch>
-        <Route exact path="/" render={() => <Redirect to="/app/dashboard" />} />
-        <Route exact path="/app" render={() => <Redirect to="/app/dashboard" />} />
+        <Route exact path="/" render={() => <Redirect to="/app/home" />} />
+        <Route exact path="/app" render={() => <Redirect to="/app/home" />} />
+        <Route exact path="/app/model" render={() => <Redirect to="/app/model" />} />
         <PrivateRoute path="/app" component={Layout} />
+        <PrivateRoute path="/app/model" component={Layout} />
         <PublicRoute path="/login" component={Login} />
         <Route component={Error} />
       </Switch>

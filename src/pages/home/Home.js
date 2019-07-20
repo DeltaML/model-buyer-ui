@@ -4,61 +4,12 @@ import Widget from "../../components/Widget";
 import PageTitle from "../../components/PageTitle";
 import {Typography} from "../../components/Wrappers";
 
-const getRandomData = (length, min, max, multiplier = 10, maxDiff = 10) => {
-    const array = new Array(length).fill();
-    let lastValue;
-
-    return array.map((item, index) => {
-        let randomValue = Math.floor(Math.random() * multiplier + 1);
-
-        while (
-            randomValue <= min ||
-            randomValue >= max ||
-            (lastValue && randomValue - lastValue > maxDiff)
-            ) {
-            randomValue = Math.floor(Math.random() * multiplier + 1);
-        }
-
-        lastValue = randomValue;
-
-        return {value: randomValue};
-    });
-};
-
-const getMainChartData = () => {
-    const resultArray = [];
-    const tablet = getRandomData(31, 3500, 6500, 7500, 1000);
-    const desktop = getRandomData(31, 1500, 7500, 7500, 1500);
-    const mobile = getRandomData(31, 1500, 7500, 7500, 1500);
-
-    for (let i = 0; i < tablet.length; i++) {
-        resultArray.push({
-            tablet: tablet[i].value,
-            desktop: desktop[i].value,
-            mobile: mobile[i].value
-        });
-    }
-
-    return resultArray;
-};
-
-const mainChartData = getMainChartData();
-
-const PieChartData = [
-    {name: "Group A", value: 400, color: "primary"},
-    {name: "Group B", value: 300, color: "secondary"},
-    {name: "Group C", value: 300, color: "warning"},
-    {name: "Group D", value: 200, color: "success"}
-];
-
-
-
 const Home = ({classes, theme, ...props}) => {
 
     return (
 
         <React.Fragment>
-            <PageTitle title="Home" button="New Model"/>
+            <PageTitle title="Home" button="New Model" buttonTo="/app/model"/>
             <Grid container spacing={32}>
                 {props.isLoading ? (
                     <CircularProgress size={26}/>

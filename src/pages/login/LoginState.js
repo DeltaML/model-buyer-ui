@@ -1,4 +1,4 @@
-import {post} from '../../utils/apiUtilities';
+import {post} from '../../utils/ApiUtilities';
 
 export const initialState = {
     isLoading: false,
