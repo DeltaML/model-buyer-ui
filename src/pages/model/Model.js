@@ -44,6 +44,7 @@ const Model = ({classes, theme, ...props}) => {
                             </Grid>
                             <Grid item>
                                 <FormControl className={classes.formControl}>
+                                    <InputLabel htmlFor="load-file">Testing File</InputLabel>
                                     <input
                                         accept="*/*"
                                         className={classes.input}
@@ -150,12 +151,44 @@ const Model = ({classes, theme, ...props}) => {
                         </Grid>
                     </Widget>
                 </Grid>
+                <Grid item lg={3} md={4} sm={6} xs={12}>
+                    <Widget
+                        title="Payment"
+                        upperTitle
+                        bodyClass={classes.fullHeightBody}
+                        className={classes.card}
+                    >
+
+
+                        <Grid
+                            container
+                            direction="row"
+                            justify="space-between"
+                            alignItems="center"
+                        >
+                            <Grid item>
+                                <FormControl className={classes.formControl}>
+                                    <InputLabel htmlFor="currency">Currency</InputLabel>
+                                    <Input id="currency" value={props.payment_requirements.currency}/>
+                                </FormControl>
+                            </Grid>
+                            <Grid item>
+                                <FormControl className={classes.formControl}>
+                                    <InputLabel htmlFor="total_pay">$</InputLabel>
+                                    <Input id="total_pay" value={props.payment_requirements.total_pay}
+                                           onChange={e => props.handleInput("payment_requirements", "total_pay", e)}/>
+                                </FormControl>
+                            </Grid>
+
+                        </Grid>
+                    </Widget>
+                </Grid>
+
                 <div>
                     <Fab color="primary" aria-label="Add" className={classes.fab} onClick={props.handleCreateModel}>
                         <AddIcon/>
                     </Fab>
                 </div>
-
 
             </Grid>
         </React.Fragment>

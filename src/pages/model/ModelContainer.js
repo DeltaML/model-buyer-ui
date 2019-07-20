@@ -17,6 +17,7 @@ export default compose(
             error: state.model.error,
             file: state.model.file,
             fileName: state.model.fileName,
+            payment_requirements: state.model.payment_requirements
         }),
         {selectModelType, createModel, setInputValues, uploadFile}
     ),
@@ -26,7 +27,7 @@ export default compose(
             props.setInputValues(input, field, event.target.value);
         },
         handleCreateModel: props => () => {
-            props.createModel(props.file, props.selectedModelType, props.features, props.target);
+            props.createModel(props.file, props.selectedModelType, props.features, props.target, props.payment_requirements);
         },
         handleSelect: props => (event) => {
             props.selectModelType(event.target.value)

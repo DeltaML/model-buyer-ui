@@ -1,4 +1,5 @@
 import dataRequirements from "./mock"
+import payment_requirements from "./mock"
 import {executeRequest} from "../../utils/ApiUtilities";
 
 export const initialState = {
@@ -10,7 +11,8 @@ export const initialState = {
     selectModelType: "",
     model: null,
     fileName: "",
-    file: null
+    file: null,
+    payment_requirements: payment_requirements
 
 };
 
@@ -27,6 +29,8 @@ export const SELECT_DATA_REQUIREMENTS_TARGET_RANGE = "Model/SELECT_DATA_REQUIREM
 export const SELECT_DATA_REQUIREMENTS_TARGET_DESC = "Model/SELECT_DATA_REQUIREMENTS_TARGET_DESC";
 export const LOAD_FILE = "Model/LOAD_FILE";
 export const LOAD_FILE_NAME = "Model/LOAD_FILE_NAME";
+export const SELECT_TOTAL_PAY = "Model/SELECT_TOTAL_PAY";
+
 
 export const createModelPending = () => ({
     type: CREATE_MODEL_PENDING
@@ -76,6 +80,9 @@ const DISPATCH_REDUCE_TYPE_MAP = {
     'target': {
         'range': SELECT_DATA_REQUIREMENTS_TARGET_RANGE,
         'desc': SELECT_DATA_REQUIREMENTS_TARGET_DESC,
+    },
+    'payment_requirements': {
+        'total_pay': SELECT_TOTAL_PAY
     }
 };
 
@@ -87,15 +94,26 @@ export const updateInputSuccess = (type, value) => ({
 
 const buildDataRequirements = (features, target) => {
     return JSON.stringify({features: features, target: target});
+};
+
+const buildPaymentRequirements = (payment_requirements) => {
+    return JSON.stringify(payment_requirements);
 }
+
+
+const buildModelFormData = (file, selectedModelType, features, target, payment_requirements) => {
+    const data = new FormData();
+    data.append('model_type', selectedModelType);
+    data.append('testing_file', file);
+    data.append("data_requirements", buildDataRequirements(features, target));
+    data.append("payment_requirements", buildPaymentRequirements(payment_requirements));
+    return data
+};
 
 export const createModel = (file, selectedModelType, features, target) => async dispatch => {
     console.log("Create Model");
     try {
-        const data = new FormData();
-        data.append('model_type', selectedModelType);
-        data.append('testing_file', file);
-        data.append("data_requirements", buildDataRequirements(features, target))
+        const data = buildModelFormData(file, selectedModelType, features, target, payment_requirements)
         const modelCreateResponse = await executeRequest("POST", "models", data);
         dispatch(createModelSuccess());
     } catch (e) {
@@ -103,7 +121,7 @@ export const createModel = (file, selectedModelType, features, target) => async 
     }
 
 
-}
+};
 
 
 export const selectModelType = (selectedModelType) => dispatch => {
