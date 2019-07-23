@@ -22,9 +22,9 @@ import Dot from './components/Dot';
 
 const structure = [
   { id: 0, label: 'Home', link: '/app/home', icon: <HomeIcon /> }
-  ,{ id: 1, label: 'Typography', link: '/app/newModel', icon: <TypographyIcon /> },
-  /*{ id: 2, label: 'Tables', link: '/app/tables', icon: <TableIcon /> },
-  { id: 3, label: 'Notifications', link: '/app/notifications', icon: <NotificationsIcon />},
+  ,{ id: 1, label: 'New Model', link: '/app/newModel', icon: <TypographyIcon /> },
+  { id: 2, label: 'View Model', link: '/app/model', icon: <SupportIcon /> },
+  /*{ id: 3, label: 'Notifications', link: '/app/notifications', icon: <NotificationsIcon />},
   {
     id: 4,
     label: 'UI Elements',

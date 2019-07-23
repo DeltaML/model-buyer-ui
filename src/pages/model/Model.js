@@ -77,42 +77,21 @@ const PieChartData = [
   { name: "Group D", value: 200, color: "success" }
 ];
 
-const Dashboard = ({ classes, theme, ...props }) => {
+const Model = ({ classes, theme, ...props }) => {
   return (
     <React.Fragment>
-      <PageTitle title="Dashboard" button="Latest Reports" />
       <Grid container spacing={32}>
         <Grid item lg={3} md={4} sm={6} xs={12}>
           <Widget
-            title="Visits Today"
+            title="Status"
             upperTitle
             bodyClass={classes.fullHeightBody}
             className={classes.card}
           >
             <div className={classes.visitsNumberContainer}>
               <Typography size="xl" weight="medium">
-                12, 678
+                In progress
               </Typography>
-              <LineChart
-                width={55}
-                height={30}
-                data={[
-                  { value: 10 },
-                  { value: 15 },
-                  { value: 10 },
-                  { value: 17 },
-                  { value: 18 }
-                ]}
-                margin={{ left: theme.spacing.unit * 2 }}
-              >
-                <Line
-                  type="natural"
-                  dataKey="value"
-                  stroke={theme.palette.success.main}
-                  strokeWidth={2}
-                  dot={false}
-                />
-              </LineChart>
             </div>
             <Grid
               container
@@ -120,24 +99,12 @@ const Dashboard = ({ classes, theme, ...props }) => {
               justify="space-between"
               alignItems="center"
             >
-              <Grid item>
-                <Typography color="textSecondary">Registrations</Typography>
-                <Typography size="md">860</Typography>
-              </Grid>
-              <Grid item>
-                <Typography color="textSecondary">Sign Out</Typography>
-                <Typography size="md">32</Typography>
-              </Grid>
-              <Grid item>
-                <Typography color="textSecondary">Rate</Typography>
-                <Typography size="md">3.25%</Typography>
-              </Grid>
             </Grid>
           </Widget>
         </Grid>
         <Grid item lg={3} md={8} sm={6} xs={12}>
           <Widget
-            title="App Performance"
+            title="General"
             upperTitle
             className={classes.card}
             bodyClass={classes.fullHeightBody}
@@ -149,7 +116,7 @@ const Dashboard = ({ classes, theme, ...props }) => {
                   color="textSecondary"
                   className={classes.legendElementText}
                 >
-                  Integration
+                  % Improvement
                 </Typography>
               </div>
               <div className={classes.legendElement}>
@@ -158,7 +125,7 @@ const Dashboard = ({ classes, theme, ...props }) => {
                   color="textSecondary"
                   className={classes.legendElementText}
                 >
-                  SDK
+                  MSE
                 </Typography>
               </div>
             </div>
@@ -168,7 +135,7 @@ const Dashboard = ({ classes, theme, ...props }) => {
                 color="textSecondary"
                 className={classes.progressSectionTitle}
               >
-                Integration
+                % Improvement
               </Typography>
               <LinearProgress
                 variant="determinate"
@@ -183,7 +150,7 @@ const Dashboard = ({ classes, theme, ...props }) => {
                 color="textSecondary"
                 className={classes.progressSectionTitle}
               >
-                SDK
+                MSE
               </Typography>
               <LinearProgress
                 variant="determinate"
@@ -196,7 +163,7 @@ const Dashboard = ({ classes, theme, ...props }) => {
         </Grid>
         <Grid item lg={3} md={8} sm={6} xs={12}>
           <Widget
-            title="Server Overview"
+            title="Iterations"
             upperTitle
             className={classes.card}
             bodyClass={classes.fullHeightBody}
@@ -269,7 +236,7 @@ const Dashboard = ({ classes, theme, ...props }) => {
             </div>
           </Widget>
         </Grid>
-        <Grid item lg={3} md={4} sm={6} xs={12}>
+        {/*<Grid item lg={3} md={4} sm={6} xs={12}>
           <Widget title="Revenue Breakdown" upperTitle className={classes.card}>
             <Grid container spacing={16}>
               <Grid item xs={6}>
@@ -306,6 +273,27 @@ const Dashboard = ({ classes, theme, ...props }) => {
                   ))}
                 </div>
               </Grid>
+            </Grid>
+          </Widget>
+        </Grid>*/}
+        <Grid item lg={3} md={4} sm={6} xs={12}>
+          <Widget
+            title="Spent Money"
+            upperTitle
+            bodyClass={classes.fullHeightBody}
+            className={classes.card}
+          >
+            <div className={classes.visitsNumberContainer}>
+              <Typography size="xl" weight="medium">
+                $10/$100
+              </Typography>
+            </div>
+            <Grid
+              container
+              direction="row"
+              justify="space-between"
+              alignItems="center"
+            >
             </Grid>
           </Widget>
         </Grid>
@@ -401,16 +389,7 @@ const Dashboard = ({ classes, theme, ...props }) => {
             <BigStat {...stat} />
           </Grid>
         ))}
-        <Grid item xs={12}>
-          <Widget
-            title="Support Requests"
-            upperTitle
-            noBodyPadding
-            bodyClass={classes.tableWidget}
-          >
-            <Table data={mock.table} />
-          </Widget>
-        </Grid>
+
       </Grid>
     </React.Fragment>
   );
@@ -530,4 +509,4 @@ const styles = theme => ({
   }
 });
 
-export default withStyles(styles, { withTheme: true })(Dashboard);
+export default withStyles(styles, { withTheme: true })(Model);
