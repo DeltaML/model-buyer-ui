@@ -19,11 +19,11 @@ import classNames from 'classnames';
 
 import SidebarLink from './components/SidebarLink/SidebarLinkContainer';
 import Dot from './components/Dot';
-
+import * as Icons from "@material-ui/icons";
 const structure = [
   { id: 0, label: 'Home', link: '/app/home', icon: <HomeIcon /> }
-  ,{ id: 1, label: 'New Model', link: '/app/newModel', icon: <TypographyIcon /> },
-  { id: 2, label: 'View Model', link: '/app/model', icon: <SupportIcon /> },
+  ,{ id: 1, label: 'New Model', link: '/app/newModel', icon: <Icons.Add/> },
+  { id: 2, label: 'View Model', link: '/app/model', icon: <Icons.SettingsApplications/> },
   /*{ id: 3, label: 'Notifications', link: '/app/notifications', icon: <NotificationsIcon />},
   {
     id: 4,

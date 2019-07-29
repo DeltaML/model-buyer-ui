@@ -18,7 +18,7 @@ export default compose(
 
   lifecycle({
     componentWillMount() {
-      this.props.fetchingHomeData()
+      this.props.fetchingHomeData(this.props)
     }
   }),
 )(HomeView);

@@ -60,7 +60,7 @@ const NewModel = ({classes, theme, ...props}) => {
                                             <CloudUploadIcon className={classes.rightIcon}/>
                                         </Button>
                                     </label>
-                                    <Typography size="m" weight="medium"> {props.fileName}</Typography>
+                                    {/*<Typography size="m" weight="medium"> {props.fileName}</Typography>*/}
 
                                 </FormControl>
 

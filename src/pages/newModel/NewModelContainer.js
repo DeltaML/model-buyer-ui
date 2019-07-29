@@ -27,7 +27,7 @@ export default compose(
             props.setInputValues(input, field, event.target.value);
         },
         handleCreateModel: props => () => {
-            props.createModel(props.file, props.selectedModelType, props.features, props.target, props.payment_requirements);
+            props.createModel(props, props.file, props.selectedModelType, props.features, props.target, props.payment_requirements);
         },
         handleSelect: props => (event) => {
             props.selectModelType(event.target.value)

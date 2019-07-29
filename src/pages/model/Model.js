@@ -90,7 +90,7 @@ const Model = ({ classes, theme, ...props }) => {
           >
             <div className={classes.visitsNumberContainer}>
               <Typography size="xl" weight="medium">
-                In progress
+                  {props.model.status}
               </Typography>
             </div>
             <Grid
@@ -168,72 +168,20 @@ const Model = ({ classes, theme, ...props }) => {
             className={classes.card}
             bodyClass={classes.fullHeightBody}
           >
-            <div className={classes.serverOverviewElement}>
-              <Typography
-                color="textSecondary"
-                className={classes.serverOverviewElementText}
-              >
-                60% / 37°С / 3.3 Ghz
+             <div className={classes.visitsNumberContainer}>
+              <Typography size="xl" weight="medium">
+                1
               </Typography>
-              <div className={classes.serverOverviewElementChartWrapper}>
-                <ResponsiveContainer height={50} width="99%">
-                  <AreaChart data={getRandomData(10)}>
-                    <Area
-                      type="natural"
-                      dataKey="value"
-                      stroke={theme.palette.secondary.main}
-                      fill={theme.palette.secondary.light}
-                      strokeWidth={2}
-                      fillOpacity="0.25"
-                    />
-                  </AreaChart>
-                </ResponsiveContainer>
-              </div>
             </div>
-            <div className={classes.serverOverviewElement}>
-              <Typography
-                color="textSecondary"
-                className={classes.serverOverviewElementText}
-              >
-                54% / 31°С / 3.3 Ghz
-              </Typography>
-              <div className={classes.serverOverviewElementChartWrapper}>
-                <ResponsiveContainer height={50} width="99%">
-                  <AreaChart data={getRandomData(10)}>
-                    <Area
-                      type="natural"
-                      dataKey="value"
-                      stroke={theme.palette.primary.main}
-                      fill={theme.palette.primary.light}
-                      strokeWidth={2}
-                      fillOpacity="0.25"
-                    />
-                  </AreaChart>
-                </ResponsiveContainer>
-              </div>
-            </div>
-            <div className={classes.serverOverviewElement}>
-              <Typography
-                color="textSecondary"
-                className={classes.serverOverviewElementText}
-              >
-                57% / 21°С / 3.3 Ghz
-              </Typography>
-              <div className={classes.serverOverviewElementChartWrapper}>
-                <ResponsiveContainer height={50} width="99%">
-                  <AreaChart data={getRandomData(10)}>
-                    <Area
-                      type="natural"
-                      dataKey="value"
-                      stroke={theme.palette.warning.main}
-                      fill={theme.palette.warning.light}
-                      strokeWidth={2}
-                      fillOpacity="0.25"
-                    />
-                  </AreaChart>
-                </ResponsiveContainer>
-              </div>
-            </div>
+            <Grid
+              container
+              direction="row"
+              justify="space-between"
+              alignItems="center"
+            >
+            </Grid>
+
+
           </Widget>
         </Grid>
         {/*<Grid item lg={3} md={4} sm={6} xs={12}>
@@ -384,11 +332,11 @@ const Model = ({ classes, theme, ...props }) => {
             </ResponsiveContainer>
           </Widget>
         </Grid>
-        {mock.bigStat.map(stat => (
+       {/* {mock.bigStat.map(stat => (
           <Grid item md={4} sm={6} xs={12} key={stat.product}>
             <BigStat {...stat} />
           </Grid>
-        ))}
+        ))}*/}
 
       </Grid>
     </React.Fragment>
