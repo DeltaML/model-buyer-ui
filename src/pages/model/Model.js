@@ -139,7 +139,7 @@ const Model = ({ classes, theme, ...props }) => {
               </Typography>
               <LinearProgress
                 variant="determinate"
-                value={30}
+                value={props.metrics.improvement}
                 classes={{ barColorPrimary: classes.progressBar }}
                 className={classes.progress}
               />
@@ -154,7 +154,7 @@ const Model = ({ classes, theme, ...props }) => {
               </Typography>
               <LinearProgress
                 variant="determinate"
-                value={55}
+                value={props.metrics.mse}
                 classes={{ barColorPrimary: classes.progressBar }}
                 className={classes.progress}
               />
@@ -170,7 +170,7 @@ const Model = ({ classes, theme, ...props }) => {
           >
              <div className={classes.visitsNumberContainer}>
               <Typography size="xl" weight="medium">
-                1
+                {props.metrics.iterations}
               </Typography>
             </div>
             <Grid

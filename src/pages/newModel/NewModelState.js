@@ -1,6 +1,6 @@
 import dataRequirements from "./mock"
 import payment_requirements from "./mock"
-import {executeRequest} from "../../utils/ApiUtilities";
+import {post} from "../../utils/ApiUtilities";
 
 export const initialState = {
     isLoading: false,
@@ -92,30 +92,22 @@ export const updateInputSuccess = (type, value) => ({
     payload: value
 });
 
-const buildDataRequirements = (features, target) => {
-    return JSON.stringify({features: features, target: target});
-};
-
-const buildPaymentRequirements = (payment_requirements) => {
-    return JSON.stringify(payment_requirements);
-}
-
 
 const buildModelFormData = (file, selectedModelType, features, target, payment_requirements) => {
-    const data = new FormData();
-    data.append('user_id', localStorage.getItem("user_id"));
-    data.append('model_type', selectedModelType);
-    data.append('testing_file', file);
-    data.append("data_requirements", buildDataRequirements(features, target));
-    data.append("payment_requirements", buildPaymentRequirements(payment_requirements));
-    return data
+    return {
+        'user_id': localStorage.getItem("user_id"),
+        'model_type': selectedModelType,
+        'data_requirements': {features: features, target: target},
+        'payment_requirements': payment_requirements
+    };
 };
 
 export const createModel = (props, file, selectedModelType, features, target) => async dispatch => {
     console.log("Create Model");
     try {
-        const data = buildModelFormData(file, selectedModelType, features, target, payment_requirements)
-        const modelCreateResponse = await executeRequest("POST", "models", data);
+        const data = buildModelFormData(file, selectedModelType, features, target, payment_requirements);
+        console.log(data);
+        const modelCreateResponse = await post("models", data);
         props.history.push(`/app/model/${modelCreateResponse.model.id}`)
 
     } catch (e) {

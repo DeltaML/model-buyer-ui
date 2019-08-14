@@ -17,7 +17,7 @@ const Home = ({classes, theme, ...props}) => {
                     props.models.map(model => (
                             <Grid item lg={3} md={4} sm={6} xs={12}>
                                 <Widget
-                                    title={model.name}
+                                    title={model.id}
                                     upperTitle
                                     bodyClass={classes.fullHeightBody}
                                     className={classes.card}

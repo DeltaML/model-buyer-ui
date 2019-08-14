@@ -3,28 +3,54 @@ import {get} from "../../utils/ApiUtilities";
 export const initialState = {
     isLoading: false,
     error: null,
-    data: null
-
+    data: null,
+    model: {
+        status: null,
+        id: null,
+        weights: null,
+        type: null
+    },
+    metrics: {
+        iterations: null,
+        improvement: null
+    }
 };
 
 
 export const FETCHING_MODEL_PENDING = "Home/FETCHING_MODEL_PENDING";
-export const FETCHING_MODEL_SUCCESS = "Home/FETCHING_MODEL_SUCCESS";
 export const FETCHING_MODEL_ERROR = "Home/FETCHING_MODEL_ERROR";
+export const FETCHING_MODEL_STATUS = "Home/FETCHING_MODEL_STATUS";
+export const FETCHING_MODEL_ID = "Home/FETCHING_MODEL_ID";
+export const FETCHING_MODEL_WEIGHTS = "Home/FETCHING_MODEL_WEIGHTS";
+export const FETCHING_MODEL_TYPE = "Home/FETCHING_MODEL_TYPE";
+export const FETCHING_MODEL_MSE = "Home/FETCHING_MODEL_MSE";
+export const FETCHING_MODEL_PARTIAL_MSE = "Home/FETCHING_MODEL_PARTIAL_MSE";
+export const FETCHING_MODEL_INITIAL_MSE = "Home/FETCHING_MODEL_INITIAL_MSE";
+export const FETCHING_MODEL_ITERATIONS = "Home/FETCHING_MODEL_ITERATIONS";
+export const FETCHING_MODEL_DATA = "Home/FETCHING_MODEL_DATA";
+export const FETCHING_MODEL_METRICS = "Home/FETCHING_MODEL_METRICS";
+
 
 export const fetchingModelDataPending = () => ({
     type: FETCHING_MODEL_PENDING
 });
 
-export const fetchingModelDataSuccess = (model) => ({
-    type: FETCHING_MODEL_SUCCESS,
-    payload: model
-});
 
 export const fetchingModelDataError = (error) => ({
     type: FETCHING_MODEL_ERROR,
     error: error
 });
+
+
+export const fetchingModelDataField = (type, status) => ({
+    type: type,
+    payload: status
+});
+
+export const dispatchModelDataSuccess = (dispatch, model) => {
+    dispatch(fetchingModelDataField(FETCHING_MODEL_DATA, model.model));
+    dispatch(fetchingModelDataField(FETCHING_MODEL_METRICS, model.metrics));
+}
 
 export const fetchingModelData = (props) => async dispatch => {
 
@@ -35,7 +61,7 @@ export const fetchingModelData = (props) => async dispatch => {
         const modelId = props.location.pathname.split("/").pop()
         const url = `models/${modelId}`;
         const modelData = await get(url);
-        dispatch(fetchingModelDataSuccess(modelData));
+        dispatchModelDataSuccess(dispatch, modelData);
     } catch (e) {
         props.history.push(`/app/newModel`)
         dispatch(fetchingModelDataError(e));
@@ -46,15 +72,18 @@ export const fetchingModelData = (props) => async dispatch => {
 
 export default function ModelReducer(state = initialState, action) {
     switch (action.type) {
-        case FETCHING_MODEL_SUCCESS:
-            return {
+        case FETCHING_MODEL_DATA: {
+          return {
                 ...state,
-                model: {
-                    ...state.model,
-                    status: action.payload.status,
-                    id: action.payload.id,
-                }
-            };
+                model: action.payload
+            }
+        };
+        case FETCHING_MODEL_METRICS: {
+          return {
+                ...state,
+                metrics: action.payload
+            }
+        };
         default:
             return state;
     }

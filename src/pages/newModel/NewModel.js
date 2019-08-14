@@ -42,31 +42,6 @@ const NewModel = ({classes, theme, ...props}) => {
                                 </Select>
 
                             </Grid>
-                            <Grid item>
-                                <FormControl className={classes.formControl}>
-                                    <InputLabel htmlFor="load-file">Testing File</InputLabel>
-                                    <input
-                                        accept="*/*"
-                                        className={classes.input}
-                                        id="contained-button-file"
-                                        multiple
-                                        type="file"
-                                        onChange={e => props.handleUploadFile(e)}
-                                    />
-                                    <label htmlFor="contained-button-file">
-                                        <Button variant="contained" component="span" className={classes.upLoadButton}
-                                        >
-                                            Upload
-                                            <CloudUploadIcon className={classes.rightIcon}/>
-                                        </Button>
-                                    </label>
-                                    {/*<Typography size="m" weight="medium"> {props.fileName}</Typography>*/}
-
-                                </FormControl>
-
-                            </Grid>
-
-
                         </Grid>
                     </Widget>
                 </Grid>

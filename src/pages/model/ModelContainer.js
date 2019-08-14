@@ -8,7 +8,8 @@ export default compose(
     connect(
         state => ({
             isLoading: state.model.isLoading,
-            model: state.model
+            model: state.model.model,
+            metrics: state.model.metrics
         }),
         {fetchingModelData}
     ),
