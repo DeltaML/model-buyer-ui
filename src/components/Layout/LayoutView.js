@@ -8,6 +8,7 @@ import Sidebar from '../Sidebar';
 
 // pages
 import Home from '../../pages/home';
+import NewModel from '../../pages/newModel';
 import Model from '../../pages/model';
 import Typography from '../../pages/typography';
 import Notifications from '../../pages/notifications';
@@ -27,6 +28,7 @@ const Layout = ({ classes, isSidebarOpened, toggleSidebar }) => (
           <div className={classes.fakeToolbar} />
           <Switch>
             <Route path="/app/home" component={Home} />
+            <Route path="/app/newModel" component={NewModel} />
             <Route path="/app/model" component={Model} />
             <Route path="/app/typography" component={Typography} />
             <Route path="/app/tables" component={Tables} />

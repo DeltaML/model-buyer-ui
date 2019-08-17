@@ -9,7 +9,7 @@ const Home = ({classes, theme, ...props}) => {
     return (
 
         <React.Fragment>
-            <PageTitle title="Home" button="New Model" buttonTo="/app/model"/>
+            <PageTitle title="Home" button="New Model" buttonTo="/app/newModel"/>
             <Grid container spacing={32}>
                 {props.isLoading ? (
                     <CircularProgress size={26}/>
@@ -17,7 +17,7 @@ const Home = ({classes, theme, ...props}) => {
                     props.models.map(model => (
                             <Grid item lg={3} md={4} sm={6} xs={12}>
                                 <Widget
-                                    title={model.name}
+                                    title={model.id}
                                     upperTitle
                                     bodyClass={classes.fullHeightBody}
                                     className={classes.card}

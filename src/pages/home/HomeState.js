@@ -26,7 +26,7 @@ export const fetchingHomeDataError = (error) => ({
 });
 
 
-export const fetchingHomeData = () => async dispatch => {
+export const fetchingHomeData = (props) => async dispatch => {
 
     dispatch(fetchingHomeDataPending());
 
@@ -36,10 +36,11 @@ export const fetchingHomeData = () => async dispatch => {
         const userData = await get(url);
         dispatch(fetchingHomeDataSuccess(userData.models));
     } catch (e) {
-        console.log(e);
+        props.history.push(`/login`)
         dispatch(fetchingHomeDataError(e));
+
     }
-}
+};
 
 
 export default function HomeReducer(state = initialState, action) {
