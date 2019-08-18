@@ -1,11 +1,9 @@
 import React from "react";
-import {Button, FormControl, Grid, Input, InputLabel, MenuItem, Select, withStyles} from "@material-ui/core";
+import {FormControl, Grid, Input, InputLabel, MenuItem, Select, withStyles} from "@material-ui/core";
 import Fab from '@material-ui/core/Fab';
-import Widget from "../../components/Widget";
+import ModelWidget from "../../components/ModelWidget";
 import PageTitle from "../../components/PageTitle";
 import AddIcon from '@material-ui/icons/Add';
-import CloudUploadIcon from '@material-ui/icons/CloudUpload';
-import {Typography} from "../../components/Wrappers";
 
 const NewModel = ({classes, theme, ...props}) => {
 
@@ -15,9 +13,9 @@ const NewModel = ({classes, theme, ...props}) => {
             <PageTitle title="Create New Model"/>
             <Grid container spacing={32}>
                 <Grid item lg={3} md={4} sm={6} xs={12}>
-                    <Widget
+                    <ModelWidget
                         upperTitle
-                        title="Model Type"
+                        title="Model "
                         bodyClass={classes.fullHeightBody}
                         className={classes.card}
                     >
@@ -28,25 +26,33 @@ const NewModel = ({classes, theme, ...props}) => {
                             alignItems="center"
                         >
                             <Grid item>
-                                <InputLabel htmlFor="model-type">Model Type</InputLabel>
-                                <Select
+                                <FormControl className={classes.formControl}>
+                                    <InputLabel htmlFor="name">Name</InputLabel>
+                                    <Input id="name" value={props.modelName}
+                                           onChange={e => props.handleInput("model", "name", e)}/>
+                                </FormControl>
+                                <div>
+                                    <InputLabel htmlFor="model-type">Model Type</InputLabel>
+                                    <Select
 
-                                    value={props.selectedModelType}
-                                    onChange={e => props.handleSelect(e)}
+                                        value={props.selectedModelType}
+                                        onChange={e => props.handleSelect(e)}
 
-                                >
-                                    {(props.modelTypes.map(modelType => (
-                                        <MenuItem id={modelType} value={modelType}>{modelType}</MenuItem>
-                                    )))}
+                                    >
+                                        {(props.modelTypes.map(modelType => (
+                                            <MenuItem id={modelType} value={modelType}>{modelType}</MenuItem>
+                                        )))}
 
-                                </Select>
+                                    </Select>
+                                </div>
+
 
                             </Grid>
                         </Grid>
-                    </Widget>
+                    </ModelWidget>
                 </Grid>
                 <Grid item lg={3} md={4} sm={6} xs={12}>
-                    <Widget
+                    <ModelWidget
                         title="Features"
                         upperTitle
                         bodyClass={classes.fullHeightBody}
@@ -90,11 +96,11 @@ const NewModel = ({classes, theme, ...props}) => {
                             </Grid>
 
                         </Grid>
-                    </Widget>
+                    </ModelWidget>
                 </Grid>
 
                 <Grid item lg={3} md={4} sm={6} xs={12}>
-                    <Widget
+                    <ModelWidget
                         title="Target"
                         upperTitle
                         bodyClass={classes.fullHeightBody}
@@ -124,10 +130,10 @@ const NewModel = ({classes, theme, ...props}) => {
                             </Grid>
 
                         </Grid>
-                    </Widget>
+                    </ModelWidget>
                 </Grid>
                 <Grid item lg={3} md={4} sm={6} xs={12}>
-                    <Widget
+                    <ModelWidget
                         title="Payment"
                         upperTitle
                         bodyClass={classes.fullHeightBody}
@@ -156,7 +162,7 @@ const NewModel = ({classes, theme, ...props}) => {
                             </Grid>
 
                         </Grid>
-                    </Widget>
+                    </ModelWidget>
                 </Grid>
 
                 <div>

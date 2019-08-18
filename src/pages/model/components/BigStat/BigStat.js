@@ -7,10 +7,6 @@ import classnames from "classnames";
 import Widget from "../../../../components/Widget";
 import { Typography } from "../../../../components/Wrappers";
 
-const getRandomData = () =>
-  Array(7)
-    .fill()
-    .map(() => ({ value: Math.floor(Math.random() * 10) + 1 }));
 
 class BigStat extends PureComponent {
   state = { value: "daily" };
@@ -21,12 +17,10 @@ class BigStat extends PureComponent {
 
   render() {
     const {
-      product,
-      theme,
-      total,
-      color,
-      registrations,
-      bounce,
+      mse,
+      improvement,
+      initialMse,
+      iterations,
       classes
     } = this.props;
     const { value } = this.state;
@@ -35,86 +29,58 @@ class BigStat extends PureComponent {
       <Widget
         header={
           <div className={classes.title}>
-            <Typography variant="h5">{product}</Typography>
-
-            <Select
-              value={this.state.value}
-              onChange={this.changeValue}
-              input={
-                <Input
-                  disableUnderline
-                  classes={{ input: classes.selectInput }}
-                />
-              }
-              className={classes.select}
-            >
-              <MenuItem value="daily">Daily</MenuItem>
-              <MenuItem value="weekly">Weekly</MenuItem>
-              <MenuItem value="monthly">Monthly</MenuItem>
-            </Select>
+            <Typography variant="h5">Metrics</Typography>
           </div>
         }
         upperTitle
       >
         <div className={classes.totalValueContainer}>
           <div className={classes.totalValue}>
-            <Typography size="xxl" color="textSecondary">
-              {total[value]}
-            </Typography>
-            <Typography color={total.percent.profit ? "success" : "secondary"}>
-              &nbsp;{total.percent.profit ? "+" : "-"}
-              {total.percent.value}%
+            <Typography size="xxl" color={improvement > 0 ? "success" : "secondary"}>
+              &nbsp;{improvement > 0 ? "+" : "-"}
+              {improvement}%
             </Typography>
           </div>
-          <BarChart width={150} height={70} data={getRandomData()}>
-            <Bar
-              dataKey="value"
-              fill={theme.palette[color].main}
-              radius={10}
-              barSize={10}
-            />
-          </BarChart>
+
         </div>
         <div className={classes.bottomStatsContainer}>
           <div className={classnames(classes.statCell, classes.borderRight)}>
             <Grid container alignItems="center">
-              <Typography variant="h6">{registrations[value].value}</Typography>
-              <ArrowForwardIcon
+              <Typography variant="h6">{initialMse}</Typography>
+              {/*<ArrowForwardIcon
                 className={classnames(classes.profitArrow, {
                   [!registrations[value].profit]: classes.profitArrowDanger
                 })}
-              />
+              />*/}
             </Grid>
             <Typography size="sm" color="textSecondary">
-              Registrations
+              Initial MSE
             </Typography>
           </div>
           <div className={classes.statCell}>
             <Grid container alignItems="center">
-              <Typography variant="h6">{bounce[value].value}%</Typography>
-              <ArrowForwardIcon
+              <Typography variant="h6">{mse}</Typography>
+              {/*<ArrowForwardIcon
                 className={classnames(classes.profitArrow, {
                   [!registrations[value].profit]: classes.profitArrowDanger
                 })}
-              />
+              />*/}
             </Grid>
             <Typography size="sm" color="textSecondary">
-              Bounce Rate
+              MSE
             </Typography>
           </div>
-          <div className={classnames(classes.statCell, classes.borderRight)}>
+          <div className={classes.statCell}>
             <Grid container alignItems="center">
-              <Typography variant="h6">
-                {registrations[value].value * 10}
-              </Typography>
-              <ArrowForwardIcon
+              <Typography variant="h6">#{iterations}</Typography>
+              {/*<ArrowForwardIcon
                 className={classnames(classes.profitArrow, {
-                  [classes.profitArrowDanger]: !registrations[value].profit
+                  [!registrations[value].profit]: classes.profitArrowDanger
                 })}
-              />
+              />*/}
             </Grid>
             <Typography size="sm" color="textSecondary">
-              Views
+              Iterations
             </Typography>
           </div>
         </div>

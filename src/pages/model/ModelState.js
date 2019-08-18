@@ -19,14 +19,6 @@ export const initialState = {
 
 export const FETCHING_MODEL_PENDING = "Home/FETCHING_MODEL_PENDING";
 export const FETCHING_MODEL_ERROR = "Home/FETCHING_MODEL_ERROR";
-export const FETCHING_MODEL_STATUS = "Home/FETCHING_MODEL_STATUS";
-export const FETCHING_MODEL_ID = "Home/FETCHING_MODEL_ID";
-export const FETCHING_MODEL_WEIGHTS = "Home/FETCHING_MODEL_WEIGHTS";
-export const FETCHING_MODEL_TYPE = "Home/FETCHING_MODEL_TYPE";
-export const FETCHING_MODEL_MSE = "Home/FETCHING_MODEL_MSE";
-export const FETCHING_MODEL_PARTIAL_MSE = "Home/FETCHING_MODEL_PARTIAL_MSE";
-export const FETCHING_MODEL_INITIAL_MSE = "Home/FETCHING_MODEL_INITIAL_MSE";
-export const FETCHING_MODEL_ITERATIONS = "Home/FETCHING_MODEL_ITERATIONS";
 export const FETCHING_MODEL_DATA = "Home/FETCHING_MODEL_DATA";
 export const FETCHING_MODEL_METRICS = "Home/FETCHING_MODEL_METRICS";
 
@@ -82,6 +74,12 @@ export default function ModelReducer(state = initialState, action) {
           return {
                 ...state,
                 metrics: action.payload
+            }
+        };
+        case FETCHING_MODEL_ERROR: {
+          return {
+                ...state,
+                error: true
             }
         };
         default:

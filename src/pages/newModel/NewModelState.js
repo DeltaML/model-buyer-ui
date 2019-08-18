@@ -6,6 +6,7 @@ export const initialState = {
     isLoading: false,
     error: null,
     modelTypes: ["LINEAR_REGRESSION"],
+    name: null,
     features: dataRequirements.dataRequirements.features,
     target: dataRequirements.dataRequirements.target,
     selectModelType: "",
@@ -30,6 +31,7 @@ export const SELECT_DATA_REQUIREMENTS_TARGET_DESC = "NewModel/SELECT_DATA_REQUIR
 export const LOAD_FILE = "NewModel/LOAD_FILE";
 export const LOAD_FILE_NAME = "NewModel/LOAD_FILE_NAME";
 export const SELECT_TOTAL_PAY = "NewModel/SELECT_TOTAL_PAY";
+export const SELECT_MODEL_NAME = "NewModel/SELECT_MODEL_NAME";
 
 
 export const createModelPending = () => ({
@@ -83,6 +85,9 @@ const DISPATCH_REDUCE_TYPE_MAP = {
     },
     'payment_requirements': {
         'total_pay': SELECT_TOTAL_PAY
+    },
+    'model': {
+        'name': SELECT_MODEL_NAME
     }
 };
 
@@ -93,19 +98,20 @@ export const updateInputSuccess = (type, value) => ({
 });
 
 
-const buildModelFormData = (file, selectedModelType, features, target, payment_requirements) => {
+const buildModelFormData = (name, selectedModelType, features, target, payment_requirements) => {
     return {
         'user_id': localStorage.getItem("user_id"),
         'model_type': selectedModelType,
+        'name': selectedModelType,
         'data_requirements': {features: features, target: target},
         'payment_requirements': payment_requirements
     };
 };
 
-export const createModel = (props, file, selectedModelType, features, target) => async dispatch => {
+export const createModel = (props, name, selectedModelType, features, target) => async dispatch => {
     console.log("Create Model");
     try {
-        const data = buildModelFormData(file, selectedModelType, features, target, payment_requirements);
+        const data = buildModelFormData(name, selectedModelType, features, target, payment_requirements);
         console.log(data);
         const modelCreateResponse = await post("models", data);
         props.history.push(`/app/model/${modelCreateResponse.model.id}`)
@@ -214,6 +220,12 @@ export default function NewModelReducer(state = initialState, action) {
                     desc: action.payload
                 }
 
+
+            };
+        case SELECT_MODEL_NAME:
+            return {
+                ...state,
+                name: action.payload
 
             };
         default:
