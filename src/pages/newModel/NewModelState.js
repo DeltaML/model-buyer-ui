@@ -102,7 +102,7 @@ const buildModelFormData = (name, selectedModelType, features, target, payment_r
     return {
         'user_id': localStorage.getItem("user_id"),
         'model_type': selectedModelType,
-        'name': selectedModelType,
+        'name': name,
         'data_requirements': {features: features, target: target},
         'payment_requirements': payment_requirements
     };

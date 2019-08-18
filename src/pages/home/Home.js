@@ -21,7 +21,7 @@ const Home = ({classes, theme, ...props}) => {
                                     upperTitle
                                     bodyClass={classes.fullHeightBody}
                                     className={classes.card}
-                                    link={"/app/model/" + model.id}
+                                    link={model.id}
                                 >
                                     <div className={classes.visitsNumberContainer}>
                                         <Typography size="xl" weight="medium">
