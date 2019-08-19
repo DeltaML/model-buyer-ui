@@ -22,17 +22,11 @@ const getWeightsChartData = () => {
 };
 const mainChartData = getWeightsChartData();
 
-const PieChartData = [
-    {name: "Group A", value: 400, color: "primary"},
-    {name: "Group B", value: 300, color: "secondary"},
-    {name: "Group C", value: 300, color: "warning"},
-    {name: "Group D", value: 200, color: "success"}
-];
 
 const Model = ({classes, theme, ...props}) => {
     return (
         <React.Fragment>
-            <PageTitle title={props.model.name}/>
+            <PageTitle title={props.model.name} modal="Show Model" modalData={props.model.weights}/>
             <Grid container spacing={32}>
                 <Grid item lg={3} md={4} sm={6} xs={12}>
                     <ModelWidget
@@ -83,13 +77,14 @@ const Model = ({classes, theme, ...props}) => {
                         </Grid>
                     </ModelWidget>
                 </Grid>
+
                 <Grid item xs={12}>
                     <ModelWidget
                         bodyClass={classes.mainChartBody}
                         header={
                             <div className={classes.mainChartHeader}>
                                 <Typography variant="headline" color="textSecondary">
-                                    MSE Comparation
+                                    MSE Comparatives
                                 </Typography>
                                 <div className={classes.mainChartHeaderLabels}>
                                     <div className={classes.mainChartHeaderLabel}>
@@ -111,10 +106,10 @@ const Model = ({classes, theme, ...props}) => {
                         <ResponsiveContainer width="100%" minWidth={500} height={350}>
                             <ComposedChart
                                 margin={{top: 0, right: -15, left: -15, bottom: 0}}
-                                data={mainChartData}
+                                data={props.chart.data}
                             >
                                 <YAxis
-                                    ticks={[0, 1000, 2000, 5000, 10000, 50000]}
+                                    ticks={[0, 1000, 2000, 5000, 10000, 30000]}
                                     tick={{fill: theme.palette.text.hint + '80', fontSize: 14}}
                                     stroke={theme.palette.text.hint + '80'}
                                     tickLine={false}
@@ -132,13 +127,18 @@ const Model = ({classes, theme, ...props}) => {
                                     strokeWidth={2}
                                     dot={false}
                                     activeDot={false}
+                                    strokeDasharray="5 5"
                                 />
                                 <Line
                                     type="natural"
                                     dataKey="partial"
                                     stroke={theme.palette.primary.main}
                                     strokeWidth={2}
-                                    dot={false}
+                                    dot={{
+                                        stroke: theme.palette.primary.main,
+                                        strokeWidth: 2,
+                                        fill: theme.palette.primary.main
+                                    }}
                                     activeDot={false}
                                 />
                                 <Line
@@ -146,11 +146,8 @@ const Model = ({classes, theme, ...props}) => {
                                     dataKey="final"
                                     stroke={theme.palette.success.main}
                                     strokeWidth={2}
-                                    dot={{
-                                        stroke: theme.palette.success.main,
-                                        strokeWidth: 2,
-                                        fill: theme.palette.success.main
-                                    }}
+                                    strokeDasharray="5 5"
+                                    dot={false}
                                 />
                             </ComposedChart>
                         </ResponsiveContainer>

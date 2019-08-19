@@ -34,7 +34,8 @@ const NewModel = ({classes, theme, ...props}) => {
                                 <div>
                                     <InputLabel htmlFor="model-type">Model Type</InputLabel>
                                     <Select
-
+                                        displayEmpty
+                                        className={classes.selectEmpty}
                                         value={props.selectedModelType}
                                         onChange={e => props.handleSelect(e)}
 
@@ -305,6 +306,9 @@ const styles = theme => ({
     },
     rightIcon: {
         marginLeft: theme.spacing.unit,
+    },
+    selectEmpty: {
+      marginTop: theme.spacing.unit * 2,
     },
 });
 
