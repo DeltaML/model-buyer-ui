@@ -9,6 +9,7 @@ import {createModel, selectModelType,setInputValues, uploadFile} from "../newMod
 export default compose(
     connect(
         state => ({
+            modelName: state.newModel.name,
             selectedModelType: state.newModel.selectedModelType,
             target: state.newModel.target,
             features: state.newModel.features,
@@ -27,7 +28,7 @@ export default compose(
             props.setInputValues(input, field, event.target.value);
         },
         handleCreateModel: props => () => {
-            props.createModel(props, props.file, props.selectedModelType, props.features, props.target, props.payment_requirements);
+            props.createModel(props, props.modelName, props.selectedModelType, props.features, props.target, props.payment_requirements);
         },
         handleSelect: props => (event) => {
             props.selectModelType(event.target.value)

@@ -13,22 +13,19 @@ export const initialState = {
     metrics: {
         iterations: null,
         improvement: null
+    },
+    chart: {
+        data: []
     }
+
 };
 
 
 export const FETCHING_MODEL_PENDING = "Home/FETCHING_MODEL_PENDING";
 export const FETCHING_MODEL_ERROR = "Home/FETCHING_MODEL_ERROR";
-export const FETCHING_MODEL_STATUS = "Home/FETCHING_MODEL_STATUS";
-export const FETCHING_MODEL_ID = "Home/FETCHING_MODEL_ID";
-export const FETCHING_MODEL_WEIGHTS = "Home/FETCHING_MODEL_WEIGHTS";
-export const FETCHING_MODEL_TYPE = "Home/FETCHING_MODEL_TYPE";
-export const FETCHING_MODEL_MSE = "Home/FETCHING_MODEL_MSE";
-export const FETCHING_MODEL_PARTIAL_MSE = "Home/FETCHING_MODEL_PARTIAL_MSE";
-export const FETCHING_MODEL_INITIAL_MSE = "Home/FETCHING_MODEL_INITIAL_MSE";
-export const FETCHING_MODEL_ITERATIONS = "Home/FETCHING_MODEL_ITERATIONS";
 export const FETCHING_MODEL_DATA = "Home/FETCHING_MODEL_DATA";
 export const FETCHING_MODEL_METRICS = "Home/FETCHING_MODEL_METRICS";
+export const FETCHING_MODEL_CHART_DATA = "Home/FETCHING_MODEL_CHART_DATA";
 
 
 export const fetchingModelDataPending = () => ({
@@ -50,7 +47,22 @@ export const fetchingModelDataField = (type, status) => ({
 export const dispatchModelDataSuccess = (dispatch, model) => {
     dispatch(fetchingModelDataField(FETCHING_MODEL_DATA, model.model));
     dispatch(fetchingModelDataField(FETCHING_MODEL_METRICS, model.metrics));
+    dispatch(fetchingModelDataField(FETCHING_MODEL_CHART_DATA, getWeightsChartData(model.metrics)));
+
 }
+
+
+export const getWeightsChartData = (metrics) => {
+    const resultArray = [];
+    for (let i = 0; i < metrics.mse_history.length; i++) {
+        resultArray.push({
+            partial: metrics.mse_history[i].mse,
+            initial: metrics.initial_mse,
+            final: metrics.mse
+        });
+    }
+    return resultArray;
+};
 
 export const fetchingModelData = (props) => async dispatch => {
 
@@ -73,15 +85,33 @@ export const fetchingModelData = (props) => async dispatch => {
 export default function ModelReducer(state = initialState, action) {
     switch (action.type) {
         case FETCHING_MODEL_DATA: {
-          return {
+            return {
                 ...state,
                 model: action.payload
             }
         };
         case FETCHING_MODEL_METRICS: {
-          return {
+            return {
                 ...state,
                 metrics: action.payload
+            }
+        };
+        case FETCHING_MODEL_CHART_DATA: {
+            return {
+                ...state,
+                chart: {
+                    ...state.chart,
+                    data: action.payload
+                }
+
+
+            }
+
+        };
+        case FETCHING_MODEL_ERROR: {
+            return {
+                ...state,
+                error: true
             }
         };
         default:

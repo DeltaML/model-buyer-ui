@@ -36,3 +36,7 @@ export const post = async (url, requestData) => {
 export const get = async (url) => {
     return await executeJsonRequest("GET", url)
 };
+
+export const del = async (url) => {
+    return await executeJsonRequest("DELETE", url)
+};

@@ -1,6 +1,6 @@
 import React from "react";
 import {Grid, withStyles,CircularProgress,} from "@material-ui/core";
-import Widget from "../../components/Widget";
+import HomeWidget from "../../components/HomeWidget";
 import PageTitle from "../../components/PageTitle";
 import {Typography} from "../../components/Wrappers";
 
@@ -16,11 +16,12 @@ const Home = ({classes, theme, ...props}) => {
                 ) : (
                     props.models.map(model => (
                             <Grid item lg={3} md={4} sm={6} xs={12}>
-                                <Widget
-                                    title={model.id}
+                                <HomeWidget
+                                    title={model.name}
                                     upperTitle
                                     bodyClass={classes.fullHeightBody}
                                     className={classes.card}
+                                    link={model.id}
                                 >
                                     <div className={classes.visitsNumberContainer}>
                                         <Typography size="xl" weight="medium">
@@ -48,7 +49,7 @@ const Home = ({classes, theme, ...props}) => {
                                         </Grid>
 
                                     </Grid>
-                                </Widget>
+                                </HomeWidget>
                             </Grid>
                         )
                     )

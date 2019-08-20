@@ -2,6 +2,7 @@ import React from "react";
 import { Button, withStyles } from "@material-ui/core";
 import { Typography } from "../Wrappers";
 import { Link } from "react-router-dom";
+import ModelDialog from '../ModelDialog';
 
 const PageTitle = ({ classes, ...props }) => (
   <div className={classes.pageTitleContainer}>
@@ -20,6 +21,9 @@ const PageTitle = ({ classes, ...props }) => (
 
       </Button>
     )}
+     {props.modal && (
+      <ModelDialog title={props.modal} data={props.modalData}></ModelDialog>
+     )}
   </div>
 );
 
