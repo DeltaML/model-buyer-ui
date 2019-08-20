@@ -1,27 +1,13 @@
 import React from "react";
 import {Grid, withStyles,} from "@material-ui/core";
 import {ComposedChart, Line, ResponsiveContainer, XAxis, YAxis} from "recharts";
-import mock from "./mock";
 
 import ModelWidget from "../../components/ModelWidget";
 import {Typography} from "../../components/Wrappers";
 import Dot from "../../components/Sidebar/components/Dot";
 import BigStat from "./components/BigStat/BigStat";
 import PageTitle from "../../components/PageTitle";
-
-const getWeightsChartData = () => {
-    const resultArray = [];
-    for (let i = 0; i < mock.model_data.partial_mse.length; i++) {
-        resultArray.push({
-            partial: mock.model_data.partial_mse[i].mse,
-            initial: mock.model_data.initial_mse,
-            final: mock.model_data.mse
-        });
-    }
-    return resultArray;
-};
-const mainChartData = getWeightsChartData();
-
+import Table from "./components/Table/Table";
 
 const Model = ({classes, theme, ...props}) => {
     return (
@@ -153,7 +139,18 @@ const Model = ({classes, theme, ...props}) => {
                         </ResponsiveContainer>
                     </ModelWidget>
                 </Grid>
+                <Grid item xs={12}>
+                    <ModelWidget
+                        title="Partial MSE's"
+                        upperTitle
+                        noBodyPadding
+                        bodyClass={classes.tableWidget}
+                    >
+                        <Table rowsData={props.metrics.partial_MSEs || []}/>
+                    </ModelWidget>
+                </Grid>
             </Grid>
+
         </React.Fragment>
     );
 };
