@@ -1,4 +1,5 @@
 # Model Buyer User Interface
+[![Build Status](https://travis-ci.com/DeltaML/model-buyer-ui.svg?branch=master)](https://travis-ci.com/DeltaML/model-buyer-ui)
 
 ## Quick Start
 
