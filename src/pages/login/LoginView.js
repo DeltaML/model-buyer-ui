@@ -30,7 +30,7 @@ const Login = ({classes, ...props}) => (
                         </Typography>
                         <GoogleLogin
                             className={classes.googleButton}
-                            clientId="334168139568-v83065ekhqqkd4ieppo2jjb4aqbdk5o8.apps.googleusercontent.com"
+                            clientId="472467752298-b0f9kui2sscptja3q9camf6udq3ag83p.apps.googleusercontent.com"
                             buttonText="&nbsp;Sign in with Google"
                             onSuccess={props.handleGoogleLoginButtonClick}
                             onFailure={props.handleGoogleLoginButtonClick}
