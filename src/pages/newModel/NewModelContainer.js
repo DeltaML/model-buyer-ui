@@ -27,6 +27,9 @@ export default compose(
         handleInput: props => (input, field, event) => {
             props.setInputValues(input, field, event.target.value);
         },
+        handleCSVInput: props => (input, field, event) => {
+            props.setInputValues(input, field, event.target.value.split(","));
+        },
         handleCreateModel: props => () => {
             props.createModel(props, props.modelName, props.selectedModelType, props.features, props.target, props.payment_requirements);
         },

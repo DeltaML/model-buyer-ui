@@ -71,14 +71,14 @@ const NewModel = ({classes, theme, ...props}) => {
                                 <FormControl className={classes.formControl}>
                                     <InputLabel htmlFor="features-list">List</InputLabel>
                                     <Input id="features-list" value={props.features.list}
-                                           onChange={e => props.handleInput("features", "list", e)}/>
+                                           onChange={e => props.handleCSVInput("features", "list", e)}/>
                                 </FormControl>
                             </Grid>
                             <Grid item>
                                 <FormControl className={classes.formControl}>
                                     <InputLabel htmlFor="features-range">Range</InputLabel>
                                     <Input id="features-range" value={props.features.range}
-                                           onChange={e => props.handleInput("features", "range", e)}/>
+                                           onChange={e => props.handleCSVInput("features", "range", e)}/>
                                 </FormControl>
                             </Grid>
                             <Grid item>
@@ -119,7 +119,7 @@ const NewModel = ({classes, theme, ...props}) => {
                                 <FormControl className={classes.formControl}>
                                     <InputLabel htmlFor="target-range">Range</InputLabel>
                                     <Input id="target-range" value={props.target.range}
-                                           onChange={e => props.handleInput("target", "range", e)}/>
+                                           onChange={e => props.handleCSVInput("target", "range", e)}/>
                                 </FormControl>
                             </Grid>
                             <Grid item>
