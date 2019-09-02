@@ -31,7 +31,7 @@ export const fetchingHomeData = (props) => async dispatch => {
     dispatch(fetchingHomeDataPending());
 
     try {
-        const userId = localStorage.getItem("user_id");
+        const userId = localStorage.getItem("model_buyer_user_id");
         const url = `users/${userId}`;
         const userData = await get(url);
         dispatch(fetchingHomeDataSuccess(userData.models));

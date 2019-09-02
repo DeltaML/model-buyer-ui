@@ -13,7 +13,7 @@ const PrivateRoute = ({ component, ...rest }) => {
   return (
     <Route
       {...rest} render={props => (
-      localStorage.getItem('id_token') ? (
+      localStorage.getItem('model_buyer_id_token') ? (
         React.createElement(component, props)
       ) : (
         <Redirect
@@ -32,7 +32,7 @@ const PublicRoute = ({ component, ...rest }) => {
   return (
     <Route
       {...rest} render={props => (
-      localStorage.getItem('id_token') ? (
+      localStorage.getItem('model_buyer_id_token') ? (
         <Redirect
           to={{
             pathname: '/',

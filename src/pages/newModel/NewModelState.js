@@ -100,7 +100,7 @@ export const updateInputSuccess = (type, value) => ({
 
 const buildModelFormData = (name, selectedModelType, features, target, payment_requirements) => {
     return {
-        'user_id': localStorage.getItem("user_id"),
+        'user_id': localStorage.getItem("model_buyer_user_id"),
         'model_type': selectedModelType,
         'name': name,
         'data_requirements': {features: features, target: target},
