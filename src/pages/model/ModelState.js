@@ -64,6 +64,14 @@ export const getWeightsChartData = (metrics) => {
     return resultArray;
 };
 
+export const transformModelData = (data) => {
+    data.metrics.improvement = (data.metrics.improvement * 100).toFixed(2)
+    data.metrics.mse = (data.metrics.mse).toFixed(2)
+    return data
+}
+
+
+
 export const fetchingModelData = (props) => async dispatch => {
 
     dispatch(fetchingModelDataPending());
@@ -73,8 +81,10 @@ export const fetchingModelData = (props) => async dispatch => {
         const modelId = props.location.pathname.split("/").pop()
         const url = `models/${modelId}`;
         const modelData = await get(url);
-        dispatchModelDataSuccess(dispatch, modelData);
+        const transformedModelData = transformModelData(modelData)
+        dispatchModelDataSuccess(dispatch, transformedModelData);
     } catch (e) {
+        console.log(e);
         props.history.push(`/app/newModel`)
         dispatch(fetchingModelDataError(e));
 

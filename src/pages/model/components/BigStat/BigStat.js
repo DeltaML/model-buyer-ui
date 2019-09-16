@@ -1,6 +1,6 @@
 import React, { PureComponent } from "react";
 import { Grid, Select, MenuItem, Input, withStyles } from "@material-ui/core";
-import { ArrowForward as ArrowForwardIcon } from "@material-ui/icons";
+import { ArrowUpward as ArrowUpwardIcon , ArrowDownward as ArrowDownwardIcon} from "@material-ui/icons";
 import { BarChart, Bar } from "recharts";
 import classnames from "classnames";
 
@@ -37,7 +37,7 @@ class BigStat extends PureComponent {
         <div className={classes.totalValueContainer}>
           <div className={classes.totalValue}>
             <Typography size="xxl" color={improvement > 0 ? "success" : "secondary"}>
-              &nbsp;{improvement > 0 ? "+" : "-"}
+                {improvement > 0 ? <ArrowUpwardIcon/>: <ArrowDownwardIcon/>}
               {improvement}%
             </Typography>
           </div>
