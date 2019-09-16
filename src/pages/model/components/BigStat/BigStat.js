@@ -38,8 +38,9 @@ class BigStat extends PureComponent {
           <div className={classes.totalValue}>
             <Typography size="xxl" color={improvement > 0 ? "success" : "secondary"}>
                 {improvement > 0 ? <ArrowUpwardIcon/>: <ArrowDownwardIcon/>}
-              {improvement}%
+              {improvement}% <Typography size="sm" color="textSecondary"> Improvement </Typography>
             </Typography>
+
           </div>
 
         </div>
@@ -47,11 +48,7 @@ class BigStat extends PureComponent {
           <div className={classnames(classes.statCell, classes.borderRight)}>
             <Grid container alignItems="center">
               <Typography variant="h6">{initialMse}</Typography>
-              {/*<ArrowForwardIcon
-                className={classnames(classes.profitArrow, {
-                  [!registrations[value].profit]: classes.profitArrowDanger
-                })}
-              />*/}
+
             </Grid>
             <Typography size="sm" color="textSecondary">
               Initial MSE
@@ -60,11 +57,7 @@ class BigStat extends PureComponent {
           <div className={classes.statCell}>
             <Grid container alignItems="center">
               <Typography variant="h6">{mse}</Typography>
-              {/*<ArrowForwardIcon
-                className={classnames(classes.profitArrow, {
-                  [!registrations[value].profit]: classes.profitArrowDanger
-                })}
-              />*/}
+
             </Grid>
             <Typography size="sm" color="textSecondary">
               MSE
@@ -73,11 +66,7 @@ class BigStat extends PureComponent {
           <div className={classes.statCell}>
             <Grid container alignItems="center">
               <Typography variant="h6">#{iterations}</Typography>
-              {/*<ArrowForwardIcon
-                className={classnames(classes.profitArrow, {
-                  [!registrations[value].profit]: classes.profitArrowDanger
-                })}
-              />*/}
+
             </Grid>
             <Typography size="sm" color="textSecondary">
               Iterations
