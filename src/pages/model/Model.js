@@ -21,17 +21,26 @@ const Model = ({classes, theme, ...props}) => {
                         bodyClass={classes.fullHeightBody}
                         className={classes.card}
                     >
-                        <div className={classes.visitsNumberContainer}>
-                            <Typography size="xl" weight="medium">
-                                {props.model.status}
-                            </Typography>
-                        </div>
+
                         <Grid
                             container
                             direction="row"
                             justify="space-between"
-                            alignItems="center"
-                        >
+                            alignItems="center">
+                            <Grid item>
+                                <Typography color="textSecondary">Status</Typography>
+                                <Typography size="md">{props.model.status}</Typography>
+                            </Grid>
+                            <Grid item>
+                                <Typography color="textSecondary">Creation Date</Typography>
+                                <Typography size="md">{props.model.creation_date}</Typography>
+                            </Grid>
+
+                            <Grid item>
+                                <Typography color="textSecondary">Last Update Date</Typography>
+                                <Typography size="md">{props.model.updated_date}</Typography>
+                            </Grid>
+
                         </Grid>
                     </ModelWidget>
                 </Grid>

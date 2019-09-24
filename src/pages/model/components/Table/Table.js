@@ -16,12 +16,16 @@ const TableComponent = ({ classes,...props }) => {
         <TableRow>
             <TableCell>Data Owner</TableCell>
             <TableCell>MSE</TableCell>
+            <TableCell>Improvement%</TableCell>
+            <TableCell>Pay</TableCell>
         </TableRow>
       </TableHead>
       <TableBody>
         {props.rowsData.map(({ data_owner, partial_MSE}) => (
           <TableRow key={data_owner}>
             <TableCell >{data_owner}</TableCell>
+            <TableCell>{partial_MSE}</TableCell>
+            <TableCell>{partial_MSE}</TableCell>
             <TableCell>{partial_MSE}</TableCell>
           </TableRow>
         ))}

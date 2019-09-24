@@ -6,6 +6,8 @@ export const initialState = {
     data: null,
     model: {
         status: null,
+        creation_date: null,
+        updated_date: null,
         id: null,
         weights: null,
         type: null
@@ -65,11 +67,10 @@ export const getWeightsChartData = (metrics) => {
 };
 
 export const transformModelData = (data) => {
-    data.metrics.improvement = (data.metrics.improvement * 100).toFixed(2)
-    data.metrics.mse = (data.metrics.mse).toFixed(2)
+    data.metrics.improvement = (data.metrics.improvement * 100).toFixed(3)
+    data.metrics.mse = (data.metrics.mse).toFixed(3)
     return data
 }
-
 
 
 export const fetchingModelData = (props) => async dispatch => {
