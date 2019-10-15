@@ -1,6 +1,6 @@
 import React from "react";
 import {Grid, withStyles,} from "@material-ui/core";
-import {ComposedChart, Line, ResponsiveContainer, XAxis, YAxis} from "recharts";
+import {LineChart, Tooltip, CartesianGrid, Line, ResponsiveContainer, XAxis, YAxis} from "recharts";
 
 import ModelWidget from "../../components/ModelWidget";
 import {Typography} from "../../components/Wrappers";
@@ -60,7 +60,7 @@ const Model = ({classes, theme, ...props}) => {
                     >
                         <div className={classes.visitsNumberContainer}>
                             <Typography size="xl" weight="medium">
-                                $10/$100
+                                ${500 * props.metrics.improvement/100}/$500
                             </Typography>
                         </div>
                         <Grid
@@ -99,22 +99,19 @@ const Model = ({classes, theme, ...props}) => {
                         }
                     >
                         <ResponsiveContainer width="100%" minWidth={500} height={350}>
-                            <ComposedChart
-                                margin={{top: 0, right: -15, left: -15, bottom: 0}}
+                            <LineChart
+                                margin={{top: 0, right: 10, left: 10, bottom: 0}}
                                 data={props.chart.data}
                             >
+                                <CartesianGrid strokeDasharray="3 3" />
                                 <YAxis
-                                    ticks={[0, 1000, 2000, 5000, 10000, 30000]}
-                                    tick={{fill: theme.palette.text.hint + '80', fontSize: 14}}
-                                    stroke={theme.palette.text.hint + '80'}
-                                    tickLine={false}
+                                    scale='log'
+                                    domain={['auto', 'dataMax + 1000']}
                                 />
                                 <XAxis
                                     tickFormatter={i => i + 1}
-                                    tick={{fill: theme.palette.text.hint + '80', fontSize: 14}}
-                                    stroke={theme.palette.text.hint + '80'}
-                                    tickLine={false}
                                 />
+                                <Tooltip />
                                 <Line
                                     type="natural"
                                     dataKey="initial"
@@ -125,16 +122,15 @@ const Model = ({classes, theme, ...props}) => {
                                     strokeDasharray="5 5"
                                 />
                                 <Line
-                                    type="natural"
+                                    type="monotone"
                                     dataKey="partial"
                                     stroke={theme.palette.primary.main}
-                                    strokeWidth={2}
+                                    strokeWidth={1}
                                     dot={{
                                         stroke: theme.palette.primary.main,
-                                        strokeWidth: 2,
-                                        fill: theme.palette.primary.main
+                                        strokeWidth: 1,
                                     }}
-                                    activeDot={false}
+                                    activeDot={{ r: 8 }}
                                 />
                                 <Line
                                     type="linear"
@@ -144,7 +140,7 @@ const Model = ({classes, theme, ...props}) => {
                                     strokeDasharray="5 5"
                                     dot={false}
                                 />
-                            </ComposedChart>
+                            </LineChart>
                         </ResponsiveContainer>
                     </ModelWidget>
                 </Grid>

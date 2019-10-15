@@ -16,17 +16,17 @@ const TableComponent = ({ classes,...props }) => {
         <TableRow>
             <TableCell>Data Owner</TableCell>
             <TableCell>MSE</TableCell>
-            <TableCell>Improvement%</TableCell>
-            <TableCell>Pay</TableCell>
+            <TableCell>Contribution (%)</TableCell>
+            <TableCell>Pay (eth)</TableCell>
         </TableRow>
       </TableHead>
       <TableBody>
-        {props.rowsData.map(({ data_owner, partial_MSE}) => (
+        {props.rowsData.map(({ data_owner, partial_MSE, payment, contributions}) => (
           <TableRow key={data_owner}>
             <TableCell >{data_owner}</TableCell>
             <TableCell>{partial_MSE}</TableCell>
-            <TableCell>{partial_MSE}</TableCell>
-            <TableCell>{partial_MSE}</TableCell>
+            <TableCell>{contributions} %</TableCell>
+            <TableCell>{payment} eth</TableCell>
           </TableRow>
         ))}
       </TableBody>
