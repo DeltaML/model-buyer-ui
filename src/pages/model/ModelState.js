@@ -14,7 +14,9 @@ export const initialState = {
     },
     metrics: {
         iterations: null,
-        improvement: null
+        improvement: null,
+        initial_payment:null,
+        spent: null
     },
     chart: {
         data: []
@@ -67,10 +69,10 @@ export const getWeightsChartData = (metrics) => {
 };
 
 export const transformModelData = (data) => {
-    data.metrics.improvement = (data.metrics.improvement * 100).toFixed(3)
-    data.metrics.mse = (data.metrics.mse).toFixed(3)
+    data.metrics.improvement = (data.metrics.improvement * 100).toFixed(2);
+    data.metrics.mse = (data.metrics.mse).toFixed(2);
     return data
-}
+};
 
 
 export const fetchingModelData = (props) => async dispatch => {
@@ -79,14 +81,14 @@ export const fetchingModelData = (props) => async dispatch => {
 
     try {
 
-        const modelId = props.location.pathname.split("/").pop()
+        const modelId = props.location.pathname.split("/").pop();
         const url = `models/${modelId}`;
         const modelData = await get(url);
-        const transformedModelData = transformModelData(modelData)
+        const transformedModelData = transformModelData(modelData);
         dispatchModelDataSuccess(dispatch, transformedModelData);
     } catch (e) {
         console.log(e);
-        props.history.push(`/app/newModel`)
+        props.history.push(`/app/newModel`);
         dispatch(fetchingModelDataError(e));
 
     }
