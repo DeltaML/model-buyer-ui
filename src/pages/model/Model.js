@@ -60,7 +60,7 @@ const Model = ({classes, theme, ...props}) => {
                     >
                         <div className={classes.visitsNumberContainer}>
                             <Typography size="xl" weight="medium">
-                                ${500 * props.metrics.improvement/100}/$500
+                                {props.metrics.spent} of {props.metrics.initial_payment} eth
                             </Typography>
                         </div>
                         <Grid
