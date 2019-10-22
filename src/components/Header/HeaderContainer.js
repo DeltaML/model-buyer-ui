@@ -18,14 +18,9 @@ export default compose(
   withState('isNotificationsUnread', 'setIsNotificationsUnread', true),
   withState('profileMenu', 'setProfileMenu', null),
   withState('isSearchOpen', 'setSearchOpen', false),
+  withState('userName', 'setUserName', null),
   withHandlers({
-    openMailMenu: props => event => {
-      props.setMailMenu(event.currentTarget);
-      props.setIsMailsUnread(false);
-    },
-    closeMailMenu: props => () => {
-      props.setMailMenu(null);
-    },
+
     openNotificationsMenu: props => event => {
       props.setNotificationsMenu(event.currentTarget);
       props.setIsNotificationsUnread(false);
@@ -33,14 +28,18 @@ export default compose(
     closeNotificationsMenu: props => () => {
       props.setNotificationsMenu(null);
     },
-    toggleSearch: props => () => {
-      props.setSearchOpen(!props.isSearchOpen);
-    },
+
     openProfileMenu: props => event => {
       props.setProfileMenu(event.currentTarget);
     },
     closeProfileMenu: props => () => {
       props.setProfileMenu(null);
     },
+    showProfilePage: props => () => {
+      // TODO: redirigir a prof page
+    },
+    getUserName: props => () => {
+      props.setUserName("John Bonachon")
+    }
   })
 )(HeaderView);

@@ -10,12 +10,7 @@ import Sidebar from '../Sidebar';
 import Home from '../../pages/home';
 import NewModel from '../../pages/newModel';
 import Model from '../../pages/model';
-import Typography from '../../pages/typography';
-import Notifications from '../../pages/notifications';
-import Maps from '../../pages/maps';
-import Tables from '../../pages/tables';
-import Icons from '../../pages/icons';
-import Charts from '../../pages/charts';
+import Profile from '../../pages/profile';
 
 const Layout = ({ classes, isSidebarOpened, toggleSidebar }) => (
   <div className={classes.root}>
@@ -30,13 +25,8 @@ const Layout = ({ classes, isSidebarOpened, toggleSidebar }) => (
             <Route path="/app/home" component={Home} />
             <Route path="/app/newModel" component={NewModel} />
             <Route path="/app/model" component={Model} />
-            <Route path="/app/typography" component={Typography} />
-            <Route path="/app/tables" component={Tables} />
-            <Route path="/app/notifications" component={Notifications} />
-            <Route exact path="/app/ui" render={() => <Redirect to="/app/ui/icons" />} />
-            <Route path="/app/ui/maps" component={Maps} />
-            <Route path="/app/ui/icons" component={Icons} />
-            <Route path="/app/ui/charts" component={Charts} />
+            <Route path="/app/profile" component={Profile} />
+
           </Switch>
         </div>
       </React.Fragment>
