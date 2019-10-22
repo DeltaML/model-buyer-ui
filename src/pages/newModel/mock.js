@@ -1,7 +1,9 @@
 export default {
     payment_requirements: {
-        "currency": "ETH",
-        "total_pay": 100
+        pay_for_model: {
+            "unit": "ether",
+            "value": 5
+        }
     },
     dataRequirements: {
         features: {

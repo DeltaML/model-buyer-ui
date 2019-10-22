@@ -6,7 +6,7 @@ import PageTitle from "../../components/PageTitle";
 import AddIcon from '@material-ui/icons/Add';
 
 const NewModel = ({classes, theme, ...props}) => {
-
+    console.log(props.payment_requirements);
     return (
 
         <React.Fragment>
@@ -151,13 +151,13 @@ const NewModel = ({classes, theme, ...props}) => {
                             <Grid item>
                                 <FormControl className={classes.formControl}>
                                     <InputLabel htmlFor="currency">Currency</InputLabel>
-                                    <Input id="currency" value={props.payment_requirements.currency}/>
+                                    <Input id="currency" value={props.payment_requirements.pay_for_model.unit}/>
                                 </FormControl>
                             </Grid>
                             <Grid item>
                                 <FormControl className={classes.formControl}>
-                                    <InputLabel htmlFor="total_pay">$</InputLabel>
-                                    <Input id="total_pay" value={props.payment_requirements.total_pay}
+                                    <InputLabel htmlFor="total_pay">Amount</InputLabel>
+                                    <Input id="total_pay" value={props.payment_requirements.pay_for_model.value}
                                            onChange={e => props.handleInput("payment_requirements", "total_pay", e)}/>
                                 </FormControl>
                             </Grid>
