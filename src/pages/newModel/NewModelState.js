@@ -13,7 +13,7 @@ export const initialState = {
     model: null,
     fileName: "",
     file: null,
-    payment_requirements: payment_requirements
+    payment_requirements: payment_requirements.payment_requirements
 
 };
 
@@ -31,6 +31,7 @@ export const SELECT_DATA_REQUIREMENTS_TARGET_DESC = "NewModel/SELECT_DATA_REQUIR
 export const LOAD_FILE = "NewModel/LOAD_FILE";
 export const LOAD_FILE_NAME = "NewModel/LOAD_FILE_NAME";
 export const SELECT_TOTAL_PAY = "NewModel/SELECT_TOTAL_PAY";
+export const SELECT_CURRENCY = "NewModel/SELECT_CURRENCY";
 export const SELECT_MODEL_NAME = "NewModel/SELECT_MODEL_NAME";
 
 
@@ -84,7 +85,10 @@ const DISPATCH_REDUCE_TYPE_MAP = {
         'desc': SELECT_DATA_REQUIREMENTS_TARGET_DESC,
     },
     'payment_requirements': {
-        'total_pay': SELECT_TOTAL_PAY
+        'pay_for_model': {
+            'value': SELECT_TOTAL_PAY,
+            'unit': SELECT_CURRENCY
+        }
     },
     'model': {
         'name': SELECT_MODEL_NAME
@@ -104,11 +108,11 @@ const buildModelFormData = (name, selectedModelType, features, target, payment_r
         'model_type': selectedModelType,
         'name': name,
         'data_requirements': {features: features, target: target},
-        'payment_requirements': payment_requirements
+        'payments_requirements': payment_requirements
     };
 };
 
-export const createModel = (props, name, selectedModelType, features, target) => async dispatch => {
+export const createModel = (props, name, selectedModelType, features, target, payment_requirements) => async dispatch => {
     console.log("Create Model");
     try {
         const data = buildModelFormData(name, selectedModelType, features, target, payment_requirements);
@@ -227,6 +231,16 @@ export default function NewModelReducer(state = initialState, action) {
                 ...state,
                 name: action.payload
 
+            };
+        case SELECT_TOTAL_PAY:
+            return {
+                ...state.payment_requirements.pay_for_model,
+                value: action.payload
+            };
+        case SELECT_CURRENCY:
+            return {
+                ...state.payment_requirements.pay_for_model,
+                unit: action.payload
             };
         default:
             return state;
