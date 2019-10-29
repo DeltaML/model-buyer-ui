@@ -1,21 +1,21 @@
 import React from "react";
-import {FormControl, Grid, Input, InputLabel, MenuItem, Select, withStyles} from "@material-ui/core";
+import {FormControl, Grid, Input, InputLabel, withStyles} from "@material-ui/core";
 import Fab from '@material-ui/core/Fab';
 import ModelWidget from "../../components/ModelWidget";
 import PageTitle from "../../components/PageTitle";
-import AddIcon from '@material-ui/icons/Add';
+import SaveIcon from '@material-ui/icons/Save';
+
 
 const Profile = ({classes, theme, ...props}) => {
 
     return (
-
         <React.Fragment>
             <PageTitle title="Profile"/>
             <Grid container spacing={32}>
                 <Grid item lg={3} md={4} sm={6} xs={12}>
                     <ModelWidget
                         upperTitle
-                        title="User Data"
+                        title="User data"
                         bodyClass={classes.fullHeightBody}
                         className={classes.card}
                     >
@@ -28,25 +28,21 @@ const Profile = ({classes, theme, ...props}) => {
                             <Grid item>
                                 <FormControl className={classes.formControl}>
                                     <InputLabel htmlFor="name">Name</InputLabel>
-                                    <Input id="name" value={props.modelName}
-                                           onChange={e => props.handleInput("model", "name", e)}/>
+                                    <Input id="name"
+                                           disabled
+                                           value={props.name}
+                                           onChange={e => props.handleNameInput(e)}/>
                                 </FormControl>
-                                <div>
-                                    <InputLabel htmlFor="model-type">Model Type</InputLabel>
-                                    <Select
-                                        displayEmpty
-                                        className={classes.selectEmpty}
-                                        value={props.selectedModelType}
-                                        onChange={e => props.handleSelect(e)}
 
-                                    >
-                                        {(props.modelTypes.map(modelType => (
-                                            <MenuItem id={modelType} value={modelType}>{modelType}</MenuItem>
-                                        )))}
-
-                                    </Select>
-                                </div>
-
+                            </Grid>
+                            <Grid item>
+                                <FormControl className={classes.formControl}>
+                                    <InputLabel htmlFor="email">Email</InputLabel>
+                                    <Input id="email"
+                                           disabled
+                                           value={props.email}
+                                           onChange={e => props.handleEmailInput(e)}/>
+                                </FormControl>
 
                             </Grid>
                         </Grid>
@@ -54,13 +50,11 @@ const Profile = ({classes, theme, ...props}) => {
                 </Grid>
                 <Grid item lg={3} md={4} sm={6} xs={12}>
                     <ModelWidget
-                        title="Features"
+                        title="Address Data"
                         upperTitle
                         bodyClass={classes.fullHeightBody}
                         className={classes.card}
                     >
-
-
                         <Grid
                             container
                             direction="row"
@@ -69,30 +63,10 @@ const Profile = ({classes, theme, ...props}) => {
                         >
                             <Grid item>
                                 <FormControl className={classes.formControl}>
-                                    <InputLabel htmlFor="features-list">List</InputLabel>
-                                    <Input id="features-list" value={props.features.list}
-                                           onChange={e => props.handleCSVInput("features", "list", e)}/>
-                                </FormControl>
-                            </Grid>
-                            <Grid item>
-                                <FormControl className={classes.formControl}>
-                                    <InputLabel htmlFor="features-range">Range</InputLabel>
-                                    <Input id="features-range" value={props.features.range}
-                                           onChange={e => props.handleCSVInput("features", "range", e)}/>
-                                </FormControl>
-                            </Grid>
-                            <Grid item>
-                                <FormControl className={classes.formControl}>
-                                    <InputLabel htmlFor="features-preProcessing">Pre Processing</InputLabel>
-                                    <Input id="features-preProcessing" value={props.features.pre_processing}
-                                           onChange={e => props.handleInput("features", "pre_processing", e)}/>
-                                </FormControl>
-                            </Grid>
-                            <Grid item>
-                                <FormControl className={classes.formControl}>
-                                    <InputLabel htmlFor="features-desc">Desc</InputLabel>
-                                    <Input id="features-desc" value={props.features.desc}
-                                           onChange={e => props.handleInput("features", "desc", e)}/>
+                                    <InputLabel htmlFor="address">Address</InputLabel>
+                                    <Input id="Address"
+                                           value={props.address}
+                                           onChange={e => props.handleAddressInput(e)}/>
                                 </FormControl>
                             </Grid>
 
@@ -100,15 +74,15 @@ const Profile = ({classes, theme, ...props}) => {
                     </ModelWidget>
                 </Grid>
 
-
                 <div>
-                    <Fab color="primary" aria-label="Add" className={classes.fab} onClick={props.handleCreateModel}>
-                        <AddIcon/>
+                    <Fab color="primary" aria-label="Add" className={classes.fab} onClick={props.handleUpdateAddress}>
+                        <SaveIcon/>
                     </Fab>
                 </div>
 
             </Grid>
         </React.Fragment>
+
     );
 };
 
@@ -117,6 +91,14 @@ const styles = theme => ({
         position: 'absolute',
         bottom: theme.spacing.unit * 10,
         right: theme.spacing.unit * 10,
+    },
+    root: {
+        flexGrow: 1,
+    },
+    paper: {
+        padding: theme.spacing.unit * 2,
+        textAlign: 'center',
+        color: theme.palette.text.secondary,
     },
     input: {
         display: 'none',
@@ -243,7 +225,7 @@ const styles = theme => ({
         marginLeft: theme.spacing.unit,
     },
     selectEmpty: {
-      marginTop: theme.spacing.unit * 2,
+        marginTop: theme.spacing.unit * 2,
     },
 });
 

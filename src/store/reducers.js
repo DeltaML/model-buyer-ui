@@ -13,5 +13,5 @@ export default combineReducers({
   home,
   newModel,
   model,
-    profile
+  profile
 });

@@ -1,44 +1,38 @@
-import {compose, withHandlers} from "recompose";
+import {compose, lifecycle, withHandlers} from "recompose";
 import {withRouter} from "react-router-dom";
 import ProfileView from "./Profile";
 import {connect} from "react-redux";
-import {createModel, selectModelType,setInputValues, uploadFile} from "../profile/ProfileState";
-
+import {fetchingProfileData, updateAddress, setInputAddress} from "./ProfileState";
 
 
 export default compose(
     connect(
         state => ({
-            modelName: state.newModel.name,
-            selectedModelType: state.newModel.selectedModelType,
-            target: state.newModel.target,
-            features: state.newModel.features,
-            modelTypes: state.newModel.modelTypes,
-            model: state.newModel.model,
-            error: state.newModel.error,
-            file: state.newModel.file,
-            fileName: state.newModel.fileName,
-            payment_requirements: state.newModel.payment_requirements
+            name: state.profile.user.name,
+            email: state.profile.user.email,
+            address: state.profile.address
         }),
-        {selectModelType, createModel, setInputValues, uploadFile}
+        {fetchingProfileData, updateAddress, setInputAddress}
     ),
     withRouter,
     withHandlers({
-        handleInput: props => (input, field, event) => {
-            props.setInputValues(input, field, event.target.value);
+        handleNameInput: props => (event) => {
+            console.log("Not defined")
         },
-        handleCSVInput: props => (input, field, event) => {
-            props.setInputValues(input, field, event.target.value.split(","));
+        handleEmailInput: props => (event) => {
+            console.log("Not defined")
         },
-        handleCreateModel: props => () => {
-            props.createModel(props, props.modelName, props.selectedModelType, props.features, props.target, props.payment_requirements);
+        handleAddressInput: props => (event) => {
+           props.setInputAddress(event.target.value)
         },
-        handleSelect: props => (event) => {
-            props.selectModelType(event.target.value)
-        },
-        handleUploadFile: props => (event) => {
-            props.uploadFile(event.target.files)
+        handleUpdateAddress: props => () => {
+            props.updateAddress(props, props.address);
         }
     }),
+    lifecycle({
+        componentWillMount() {
+            this.props.fetchingProfileData(this.props)
+        }
+    })
 
 )(ProfileView);
