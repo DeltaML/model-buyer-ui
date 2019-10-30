@@ -25,27 +25,7 @@ import { Badge, Typography } from "../Wrappers";
 import Notification from "../Notification";
 import UserAvatar from "../UserAvatar";
 
-const notifications = [
- /* { id: 0, color: "warning", message: "Check out this awesome ticket" },
-  {
-    id: 1,
-    color: "success",
-    type: "info",
-    message: "What is the best way to get ..."
-  },
-  {
-    id: 2,
-    color: "secondary",
-    type: "notification",
-    message: "This is just a simple notification"
-  },
-  {
-    id: 3,
-    color: "primary",
-    type: "e-commerce",
-    message: "12 new orders has arrived today"
-  }*/
-];
+const notifications = [];
 
 const Header = ({ classes, isSidebarOpened, toggleSidebar, ...props }) => (
   <AppBar position="fixed" className={classes.appBar}>
@@ -131,34 +111,20 @@ const Header = ({ classes, isSidebarOpened, toggleSidebar, ...props }) => (
       >
         <div className={classes.profileMenuUser}>
           <Typography variant="h4" weight="medium">
-              User name
+              Menu
           </Typography>
-          <Typography
-            className={classes.profileMenuLink}
-            component="a"
-            color="primary"
-            href="https://flatlogic.com"
-          >
-            Flalogic.com
-          </Typography>
+
         </div>
         <MenuItem
           className={classNames(
             classes.profileMenuItem,
             classes.headerMenuItem
           )}
+           onClick={props.showProfilePage}
         >
           <AccountIcon className={classes.profileMenuIcon} /> Profile
         </MenuItem>
-        <MenuItem
-          className={classNames(
-            classes.profileMenuItem,
-            classes.headerMenuItem
-          )}
-          onClick={props.showProfilePage}
-        >
-          <AccountIcon className={classes.profileMenuIcon} /> Tasks
-        </MenuItem>
+
 
         <div className={classes.profileMenuUser}>
           <Typography

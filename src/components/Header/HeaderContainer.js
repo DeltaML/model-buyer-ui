@@ -1,6 +1,6 @@
 import { compose, withState, withHandlers } from 'recompose';
 import { connect } from 'react-redux';
-
+import {withRouter} from "react-router-dom";
 import HeaderView from './HeaderView';
 import { signOut } from '../../pages/login/LoginState';
 import { toggleSidebar } from '../Layout/LayoutState';
@@ -8,6 +8,7 @@ import { toggleSidebar } from '../Layout/LayoutState';
 export default compose(
   connect(
     state => ({
+        userName: "",
       isSidebarOpened: state.layout.isSidebarOpened,
     }),
     { signOut, toggleSidebar },
@@ -19,6 +20,7 @@ export default compose(
   withState('profileMenu', 'setProfileMenu', null),
   withState('isSearchOpen', 'setSearchOpen', false),
   withState('userName', 'setUserName', null),
+  withRouter,
   withHandlers({
 
     openNotificationsMenu: props => event => {
@@ -37,6 +39,8 @@ export default compose(
     },
     showProfilePage: props => () => {
       // TODO: redirigir a prof page
+        console.log("Redirect to profile page")
+        props.history.push(`/app/profile`)
     },
     getUserName: props => () => {
       props.setUserName("John Bonachon")
