@@ -1,6 +1,7 @@
 import dataRequirements from "./mock"
 import payment_requirements from "./mock"
 import {post} from "../../utils/ApiUtilities";
+import { toast } from "react-toastify";
 
 export const initialState = {
     isLoading: false,
@@ -116,11 +117,12 @@ export const createModel = (props, name, selectedModelType, features, target, pa
     console.log("Create Model");
     try {
         const data = buildModelFormData(name, selectedModelType, features, target, payment_requirements);
-        console.log(data);
         const modelCreateResponse = await post("models", data);
+        toast.success("Model request created");
         props.history.push(`/app/model/${modelCreateResponse.model.id}`)
 
     } catch (e) {
+        toast.error("Error creating model");
         dispatch(createModelError());
     }
 
