@@ -33,12 +33,12 @@ const Model = ({classes, theme, ...props}) => {
                             </Grid>
                             <Grid item>
                                 <Typography color="textSecondary">Creation Date</Typography>
-                                <Typography size="md">{props.model.creation_date}</Typography>
+                                <Typography size="sm">{props.model.creation_date}</Typography>
                             </Grid>
 
                             <Grid item>
                                 <Typography color="textSecondary">Last Update Date</Typography>
-                                <Typography size="md">{props.model.updated_date}</Typography>
+                                <Typography size="sm">{props.model.updated_date}</Typography>
                             </Grid>
 
                         </Grid>
