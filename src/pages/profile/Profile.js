@@ -4,6 +4,8 @@ import Fab from '@material-ui/core/Fab';
 import ModelWidget from "../../components/ModelWidget";
 import PageTitle from "../../components/PageTitle";
 import SaveIcon from '@material-ui/icons/Save';
+import {ToastContainer} from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 
 const Profile = ({classes, theme, ...props}) => {
@@ -11,6 +13,8 @@ const Profile = ({classes, theme, ...props}) => {
     return (
         <React.Fragment>
             <PageTitle title="Profile"/>
+            <ToastContainer autoClose={2000}/>
+
             <Grid container spacing={32}>
                 <Grid item lg={3} md={4} sm={6} xs={12}>
                     <ModelWidget
