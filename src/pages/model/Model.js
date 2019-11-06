@@ -8,15 +8,20 @@ import Dot from "../../components/Sidebar/components/Dot";
 import BigStat from "./components/BigStat/BigStat";
 import PageTitle from "../../components/PageTitle";
 import Table from "./components/Table/Table";
+import Moment from 'react-moment';
 
 const Model = ({classes, theme, ...props}) => {
     return (
         <React.Fragment>
             <PageTitle title={props.model.name} modal="Show Model" modalData={props.model.weights}/>
             <Grid container spacing={32}>
-                <Grid item lg={3} md={4} sm={6} xs={12}>
+                <Grid item lg={4} md={4} sm={6} xs={12}>
                     <ModelWidget
-                        title="Status"
+                        header={
+                            <div className={classes.title}>
+                                <Typography variant="h5">Status</Typography>
+                            </div>
+                        }
                         upperTitle
                         bodyClass={classes.fullHeightBody}
                         className={classes.card}
@@ -24,36 +29,51 @@ const Model = ({classes, theme, ...props}) => {
 
                         <Grid
                             container
-                            direction="row"
+                            direction="column"
                             justify="space-between"
-                            alignItems="center">
+                            alignItems="flex-start"
+                            spacing={1}
+                            className={classes.fullHeightBody}
+                        >
                             <Grid item>
                                 <Typography color="textSecondary">Status</Typography>
                                 <Typography size="md">{props.model.status}</Typography>
                             </Grid>
                             <Grid item>
                                 <Typography color="textSecondary">Creation Date</Typography>
-                                <Typography size="sm">{props.model.creation_date}</Typography>
+                                <Typography size="sm">
+                                    <Moment format="YYYY/MM/DD HH:mm">
+                                        {props.model.creation_date}
+                                    </Moment>
+                                </Typography>
                             </Grid>
 
                             <Grid item>
                                 <Typography color="textSecondary">Last Update Date</Typography>
-                                <Typography size="sm">{props.model.updated_date}</Typography>
+                                <Typography size="sm">
+                                    <Moment format="YYYY/MM/DD HH:mm">
+                                        {props.model.updated_date}
+                                    </Moment>
+                                </Typography>
                             </Grid>
 
                         </Grid>
                     </ModelWidget>
                 </Grid>
 
-                <Grid item md={4} sm={6} xs={12}>
+                <Grid item lg={4} md={4} sm={6} xs={12}>
                     <BigStat mse={props.metrics.mse} improvement={props.metrics.improvement}
                              initialMse={props.metrics.initial_mse} iterations={props.metrics.iterations}/>
                 </Grid>
 
 
-                <Grid item lg={3} md={4} sm={6} xs={12}>
+                <Grid item lg={4} md={4} sm={6} xs={12}>
                     <ModelWidget
-                        title="Spent Money"
+                        header={
+                            <div className={classes.title}>
+                                <Typography variant="h5">Spent Money</Typography>
+                            </div>
+                        }
                         upperTitle
                         bodyClass={classes.fullHeightBody}
                         className={classes.card}
