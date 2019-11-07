@@ -4,6 +4,8 @@ import Fab from '@material-ui/core/Fab';
 import ModelWidget from "../../components/ModelWidget";
 import PageTitle from "../../components/PageTitle";
 import AddIcon from '@material-ui/icons/Add';
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const NewModel = ({classes, theme, ...props}) => {
     console.log(props.payment_requirements);
@@ -11,6 +13,7 @@ const NewModel = ({classes, theme, ...props}) => {
 
         <React.Fragment>
             <PageTitle title="Create New Model"/>
+            <ToastContainer autoClose={2000}/>
             <Grid container spacing={32}>
                 <Grid item lg={3} md={4} sm={6} xs={12}>
                     <ModelWidget
@@ -35,6 +38,7 @@ const NewModel = ({classes, theme, ...props}) => {
                                     <InputLabel htmlFor="model-type">Model Type</InputLabel>
                                     <Select
                                         displayEmpty
+                                        required
                                         className={classes.selectEmpty}
                                         value={props.selectedModelType}
                                         onChange={e => props.handleSelect(e)}

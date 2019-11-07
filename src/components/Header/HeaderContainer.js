@@ -38,8 +38,6 @@ export default compose(
       props.setProfileMenu(null);
     },
     showProfilePage: props => () => {
-      // TODO: redirigir a prof page
-        console.log("Redirect to profile page")
         props.history.push(`/app/profile`)
     },
     getUserName: props => () => {

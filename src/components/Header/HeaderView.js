@@ -44,6 +44,7 @@ const Header = ({ classes, isSidebarOpened, toggleSidebar, ...props }) => (
               root: classNames(classes.headerIcon, classes.headerIconCollapse)
             }}
           />
+
         ) : (
           <MenuIcon
             classes={{

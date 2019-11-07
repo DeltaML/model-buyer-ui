@@ -1,4 +1,5 @@
 import {get, post} from "../../utils/ApiUtilities";
+import { toast } from "react-toastify";
 
 export const initialState = {
     isLoading: false,
@@ -86,9 +87,11 @@ export const updateAddress = (props, address) => async dispatch => {
         const url = `users/${userId}/address`;
         const userUpdateAddressResponse = await post(url, data);
         console.log(userUpdateAddressResponse)
+        toast.success("Address updated");
         dispatch(dispatchUpdateAddressSuccess());
 
     } catch (e) {
+        toast.error("Error updating address");
         dispatch(dispatchUpdateAddressError());
     }
 
