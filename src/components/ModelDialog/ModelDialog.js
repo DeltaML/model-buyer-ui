@@ -1,5 +1,5 @@
 import React from 'react';
-import {withStyles} from '@material-ui/core/styles';
+import {Grid, withStyles} from "@material-ui/core";
 import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
 import MuiDialogTitle from '@material-ui/core/DialogTitle';
@@ -8,17 +8,24 @@ import MuiDialogActions from '@material-ui/core/DialogActions';
 import IconButton from '@material-ui/core/IconButton';
 import CloseIcon from '@material-ui/icons/Close';
 import Typography from '@material-ui/core/Typography';
+import ReactJson from 'react-json-view'
+
 
 const DialogTitle = withStyles(styles)(props => {
     const {children, classes, onClose} = props;
     return (
         <MuiDialogTitle disableTypography className={classes.root}>
-            <Typography variant="h6">{children}</Typography>
-            {onClose ? (
-                <IconButton aria-label="close" className={classes.closeButton} onClick={onClose}>
-                    <CloseIcon/>
-                </IconButton>
-            ) : null}
+            <Grid container
+                  justify="space-between"
+            >
+                <Typography variant="h6">{children}</Typography>
+                {onClose ? (
+                    <IconButton aria-label="close" className={classes.closeButton} onClick={onClose}>
+                        <CloseIcon/>
+                    </IconButton>
+                ) : null}
+            </Grid>
+
         </MuiDialogTitle>
     );
 });
@@ -37,36 +44,40 @@ const DialogActions = withStyles(theme => ({
 
 
 const ModelDialog = ({classes, ...props}) => {
-      const [open, setOpen] = React.useState(false);
+    const [open, setOpen] = React.useState(false);
 
-  const handleClickOpen = () => {
-    setOpen(true);
-  };
-  const handleClose = () => {
-    setOpen(false);
-  };
+    const handleClickOpen = () => {
+        setOpen(true);
+    };
+    const handleClose = () => {
+        setOpen(false);
+    };
     return (
-    <div className={classes.pageTitleContainer}>
-        <Button variant="outlined" color="secondary" onClick={handleClickOpen}>
-            Show model
-        </Button>
-        <Dialog onClose={handleClose} aria-labelledby="customized-dialog-title" open={open}>
-            <DialogTitle id="customized-dialog-title" onClose={handleClose}>
-                {props.title}
-            </DialogTitle>
-            <DialogContent dividers>
+        <div className={classes.pageTitleContainer}>
+            <Button variant="outlined" color="secondary" onClick={handleClickOpen}>
+                Show model
+            </Button>
+            <Grid container direction="column">
+                <Dialog onClose={handleClose}
+                        aria-labelledby="customized-dialog-title"
+                        open={open}
+                        maxWidth='xl'
+                        fullWidth={true}>
+                    <DialogTitle id="customized-dialog-title" onClose={handleClose}>
+                        {props.title}
+                    </DialogTitle>
+                    <Grid item lg={3} md={4} sm={6} xs={12}>
+                        <DialogContent dividers>
+                            <ReactJson enableClipboard={true} src={props.data}/>
+                        </DialogContent>
+                    </Grid>
 
-                    <div><Typography gutterBottom>{JSON.stringify(props.data, null, 2) }</Typography></div>
 
-            </DialogContent>
-            <DialogActions>
-                <Button onClick={handleClose} color="primary">
-                    CLose
-                </Button>
-            </DialogActions>
-        </Dialog>
-    </div>
-)
+                </Dialog>
+            </Grid>
+
+        </div>
+    )
 };
 
 const styles = theme => ({
@@ -76,8 +87,8 @@ const styles = theme => ({
     },
     closeButton: {
         position: 'absolute',
-        right: theme.spacing.unit ,
-        top: theme.spacing.unit ,
+        right: theme.spacing.unit,
+        top: theme.spacing.unit,
         color: theme.palette.grey[500],
     },
 });
