@@ -27,14 +27,25 @@ export const fetchingHomeDataError = (error) => ({
 
 
 export const fetchingHomeData = (props) => async dispatch => {
-
     dispatch(fetchingHomeDataPending());
-
+    let colorMap = {
+        "WAITING": "error.main",
+        "INITIATED": "primary.main",
+        "IN_PRGRESS": "primary.main",
+        "FINISHED": "grey.500"
+    };
     try {
         const userId = localStorage.getItem("model_buyer_user_id");
         const url = `users/${userId}`;
         const userData = await get(url);
-        dispatch(fetchingHomeDataSuccess(userData.models));
+        let models = userData.models;
+        models = models.map(model => {
+            model.status_color = colorMap[model.status];
+            model.improvement = (model.improvement * 100).toFixed(2);
+            model.cost = model.cost.toFixed(1);
+            return model;
+        });
+        dispatch(fetchingHomeDataSuccess(models));
     } catch (e) {
         props.history.push(`/login`)
         dispatch(fetchingHomeDataError(e));
