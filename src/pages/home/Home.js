@@ -10,7 +10,7 @@ const Home = ({classes, theme, ...props}) => {
 
         <React.Fragment>
             <PageTitle title="Home" button="New Model" buttonTo="/app/newModel"/>
-            <Grid container spacing={32}>
+            <Grid container spacing={2}>
                 {props.isLoading ? (
                     <CircularProgress size={26}/>
                 ) : (
