@@ -36,16 +36,16 @@ const Home = ({classes, theme, ...props}) => {
                                         alignItems="center"
                                     >
                                         <Grid item>
-                                            <Typography color="textSecondary">Improvement</Typography>
+                                            <Typography color="textSecondary">Improv.</Typography>
                                             <Typography size="md">{model.improvement}%</Typography>
                                         </Grid>
                                         <Grid item>
-                                            <Typography color="textSecondary">Iterations</Typography>
+                                            <Typography color="textSecondary"># Iter.</Typography>
                                             <Typography size="md">{model.iterations}</Typography>
                                         </Grid>
                                         <Grid item>
-                                            <Typography color="textSecondary">Cost</Typography>
-                                            <Typography size="md">${model.cost}</Typography>
+                                            <Typography color="textSecondary">Spent</Typography>
+                                            <Typography size="md">{model.cost} eth</Typography>
                                         </Grid>
 
                                     </Grid>
