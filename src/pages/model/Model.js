@@ -14,7 +14,7 @@ const Model = ({classes, theme, ...props}) => {
     return (
         <React.Fragment>
             <PageTitle title={props.model.name} modal="Show Model" modalData={props.model.weights}/>
-            <Grid container spacing={32}>
+            <Grid container spacing={2}>
                 <Grid item lg={4} md={4} sm={6} xs={12}>
                     <ModelWidget
                         header={
