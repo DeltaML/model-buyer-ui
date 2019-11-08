@@ -22,6 +22,7 @@ const Home = ({classes, theme, ...props}) => {
                                     bodyClass={classes.fullHeightBody}
                                     className={classes.card}
                                     link={model.id}
+                                    bColor={model.status_color}
                                 >
                                     <div className={classes.visitsNumberContainer}>
                                         <Typography size="xl" weight="medium">

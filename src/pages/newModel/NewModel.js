@@ -14,7 +14,7 @@ const NewModel = ({classes, theme, ...props}) => {
         <React.Fragment>
             <PageTitle title="Create New Model"/>
             <ToastContainer autoClose={2000}/>
-            <Grid container spacing={32}>
+            <Grid container spacing={2}>
                 <Grid item lg={3} md={4} sm={6} xs={12}>
                     <ModelWidget
                         upperTitle
@@ -24,9 +24,10 @@ const NewModel = ({classes, theme, ...props}) => {
                     >
                         <Grid
                             container
-                            direction="row"
-                            justify="space-between"
-                            alignItems="center"
+                            direction="column"
+                            justify="space-around"
+                            alignItems="flex-start"
+                            spacing={2}
                         >
                             <Grid item>
                                 <FormControl className={classes.formControl}>
@@ -34,24 +35,21 @@ const NewModel = ({classes, theme, ...props}) => {
                                     <Input id="name" value={props.modelName}
                                            onChange={e => props.handleInput("model", "name", e)}/>
                                 </FormControl>
-                                <div>
+                            </Grid>
+                            <Grid item>
+                                <FormControl className={classes.selectEmpty}>
                                     <InputLabel htmlFor="model-type">Model Type</InputLabel>
                                     <Select
-                                        displayEmpty
                                         required
                                         className={classes.selectEmpty}
                                         value={props.selectedModelType}
                                         onChange={e => props.handleSelect(e)}
-
                                     >
                                         {(props.modelTypes.map(modelType => (
                                             <MenuItem id={modelType} value={modelType}>{modelType}</MenuItem>
                                         )))}
-
                                     </Select>
-                                </div>
-
-
+                                </FormControl>
                             </Grid>
                         </Grid>
                     </ModelWidget>
@@ -312,7 +310,9 @@ const styles = theme => ({
         marginLeft: theme.spacing.unit,
     },
     selectEmpty: {
-      marginTop: theme.spacing.unit * 2,
+        marginTop: theme.spacing.unit * 1,
+        width: "100%",
+        minWidth: 190
     },
 });
 
