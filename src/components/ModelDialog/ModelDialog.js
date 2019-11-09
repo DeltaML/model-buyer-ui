@@ -25,7 +25,6 @@ const DialogTitle = withStyles(styles)(props => {
                     </IconButton>
                 ) : null}
             </Grid>
-
         </MuiDialogTitle>
     );
 });
@@ -68,7 +67,14 @@ const ModelDialog = ({classes, ...props}) => {
                     </DialogTitle>
                     <Grid item lg={3} md={4} sm={6} xs={12}>
                         <DialogContent dividers>
-                            <ReactJson enableClipboard={true} src={props.data}/>
+                            <ReactJson src={props.data}
+
+                                       enableClipboard={copy => {
+                                           navigator.clipboard.writeText(JSON.stringify(copy.src)).then(
+                                               () => console.log("Copy ok"),
+                                               () => console.log("Copy error"));
+                                       }}
+                            />
                         </DialogContent>
                     </Grid>
 
