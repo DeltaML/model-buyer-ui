@@ -18,7 +18,8 @@ export default compose(
             error: state.newModel.error,
             file: state.newModel.file,
             fileName: state.newModel.fileName,
-            payment_requirements: state.newModel.payment_requirements
+            payment_requirements: state.newModel.payment_requirements,
+            hyperparameter: state.newModel.hyperparameter
         }),
         {selectModelType, createModel, setInputValues, uploadFile}
     ),
