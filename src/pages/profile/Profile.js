@@ -15,7 +15,7 @@ const Profile = ({classes, theme, ...props}) => {
             <PageTitle title="Profile"/>
             <ToastContainer autoClose={2000}/>
 
-            <Grid container spacing={32}>
+            <Grid container spacing={2}>
                 <Grid item lg={3} md={4} sm={6} xs={12}>
                     <ModelWidget
                         upperTitle
