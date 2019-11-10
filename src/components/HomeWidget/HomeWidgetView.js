@@ -1,6 +1,6 @@
 import React from "react";
 import classnames from "classnames";
-import {Menu, MenuItem, Paper, withStyles, IconButton} from "@material-ui/core";
+import {Menu, MenuItem, Paper, withStyles, Box, IconButton} from "@material-ui/core";
 import Typography from "@material-ui/core/es/Typography/Typography";
 import { MoreVert as MoreIcon } from "@material-ui/icons";
 
@@ -13,10 +13,11 @@ const HomeWidget = ({
                         className,
                         disableWidgetMenu,
                         link,
+                        bColor,
                         ...props
                     }) => (
-    <div className={classes.widgetWrapper}>
-        <Paper className={classes.paper} classes={{root: classes.widgetRoot}}>
+    <Box borderTop={3} borderColor={bColor} borderRadius="borderRadius" className={classes.widgetWrapper}>
+        <Paper className={classes.paper} onClick={() => props.editModel(link)} classes={{root: classes.widgetRoot}}>
             <div className={classes.widgetHeader}>
                 {props.header ? (
                     props.header
@@ -65,13 +66,14 @@ const HomeWidget = ({
             </MenuItem>
 
         </Menu>
-    </div>
+    </Box>
 );
 
 const styles = theme => ({
     widgetWrapper: {
         display: "flex",
-        minHeight: "100%"
+        minHeight: "100%",
+        cursor: "pointer"
     },
     widgetHeader: {
         padding: theme.spacing.unit * 3,
