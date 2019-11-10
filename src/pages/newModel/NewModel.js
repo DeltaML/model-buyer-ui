@@ -1,13 +1,14 @@
 import React from "react";
-import {FormControl, Grid, Input, InputLabel, MenuItem, Select, withStyles} from "@material-ui/core";
+import {FormControl, Grid, Input, InputLabel, MenuItem, Select, TextField, withStyles} from "@material-ui/core";
 import Fab from '@material-ui/core/Fab';
 import ModelWidget from "../../components/ModelWidget";
 import PageTitle from "../../components/PageTitle";
 import AddIcon from '@material-ui/icons/Add';
-import { ToastContainer } from "react-toastify";
+import {ToastContainer} from "react-toastify";
 
 
 import "react-toastify/dist/ReactToastify.css";
+import TableReqsComponent from "../home/components/Table/TableReqs";
 
 const NewModel = ({classes, theme, ...props}) => {
     return (
@@ -15,58 +16,94 @@ const NewModel = ({classes, theme, ...props}) => {
         <React.Fragment>
             <PageTitle title="Create New Model"/>
             <ToastContainer autoClose={2000}/>
-            <Grid container spacing={2}>
-                <Grid item lg={3} md={4} sm={6} xs={12}>
-                    <ModelWidget
-                        upperTitle
-                        title="Model "
-                        bodyClass={classes.fullHeightBody}
-                        className={classes.card}
-                    >
-                        <Grid
-                            container
-                            direction="column"
-                            justify="space-around"
-                            alignItems="flex-start"
-                            spacing={2}
+            <Grid container direction="row" spacing={3}>
+                <Grid container item direction="column" spacing={3} lg={3}>
+                    <Grid item>
+                        <ModelWidget
+                            upperTitle
+                            title="Model"
+                            bodyClass={classes.fullHeightBody}
+                            className={classes.card}
                         >
-                            <Grid item>
-                                <FormControl className={classes.formControl}>
-                                    <InputLabel htmlFor="name">Name</InputLabel>
-                                    <Input id="name" value={props.modelName}
-                                           onChange={e => props.handleInput("model", "name", e)}/>
-                                </FormControl>
+                            <Grid
+                                container
+                                direction="column"
+                                justify="space-around"
+                                alignItems="flex-start"
+                                spacing={2}
+                            >
+                                <Grid item>
+                                    <FormControl className={classes.formControl}>
+                                        <InputLabel htmlFor="name">Name</InputLabel>
+                                        <Input id="name" value={props.modelName}
+                                               onChange={e => props.handleInput("model", "name", e)}/>
+                                    </FormControl>
+                                </Grid>
+                                <Grid item>
+                                    <FormControl className={classes.selectEmpty}>
+                                        <InputLabel htmlFor="model-type">Model Type</InputLabel>
+                                        <Select
+                                            required
+                                            className={classes.selectEmpty}
+                                            value={props.selectedModelType}
+                                            onChange={e => props.handleSelect(e)}
+                                        >
+                                            {(props.modelTypes.map(modelType => (
+                                                <MenuItem id={modelType} value={modelType}>{modelType}</MenuItem>
+                                            )))}
+                                        </Select>
+                                    </FormControl>
+                                </Grid>
                             </Grid>
-                            <Grid item>
-                                <FormControl className={classes.selectEmpty}>
-                                    <InputLabel htmlFor="model-type">Model Type</InputLabel>
-                                    <Select
-                                        required
-                                        className={classes.selectEmpty}
-                                        value={props.selectedModelType}
-                                        onChange={e => props.handleSelect(e)}
-                                    >
-                                        {(props.modelTypes.map(modelType => (
-                                            <MenuItem id={modelType} value={modelType}>{modelType}</MenuItem>
-                                        )))}
-                                    </Select>
-                                </FormControl>
+                        </ModelWidget>
+
+                    </Grid>
+                    <Grid item>
+                        <ModelWidget
+                            title="Payment"
+                            upperTitle
+                            bodyClass={classes.fullHeightBody}
+                            className={classes.card}
+                        >
+
+
+                            <Grid
+                                container
+                                direction="column"
+                                justify="space-around"
+                                alignItems="flex-start"
+                            >
+                                <Grid item>
+                                    <FormControl className={classes.formControl}>
+                                        <InputLabel htmlFor="currency">Currency</InputLabel>
+                                        <Input id="currency" value={props.payment_requirements.pay_for_model.unit}/>
+                                    </FormControl>
+                                </Grid>
+                                <Grid item>
+                                    <FormControl className={classes.formControl}>
+                                        <InputLabel htmlFor="total_pay">Amount</InputLabel>
+                                        <Input id="total_pay" value={props.payment_requirements.pay_for_model.value}
+                                               onChange={e => props.handleInput("payment_requirements", "total_pay", e)}/>
+                                    </FormControl>
+                                </Grid>
+
                             </Grid>
-                        </Grid>
-                    </ModelWidget>
+                        </ModelWidget>
+                    </Grid>
                 </Grid>
-                <Grid item lg={3} md={4} sm={6} xs={12}>
+
+                <Grid item lg={6}>
                     <ModelWidget
                         title="Features"
                         upperTitle
                         bodyClass={classes.fullHeightBody}
                         className={classes.card}
                     >
+                        <TableReqsComponent classes={classes.textField} rowsData={props.modelFeatures} />
 
+                     {/*   <Grid
 
-                        <Grid
-                            container
-                            direction="row"
+                            direction="column"
                             justify="space-between"
                             alignItems="center"
                         >
@@ -99,11 +136,11 @@ const NewModel = ({classes, theme, ...props}) => {
                                 </FormControl>
                             </Grid>
 
-                        </Grid>
+                        </Grid>*/}
                     </ModelWidget>
                 </Grid>
 
-                <Grid item lg={3} md={4} sm={6} xs={12}>
+                <Grid item lg={3}>
                     <ModelWidget
                         title="Target"
                         upperTitle
@@ -114,9 +151,9 @@ const NewModel = ({classes, theme, ...props}) => {
 
                         <Grid
                             container
-                            direction="row"
-                            justify="space-between"
-                            alignItems="center"
+                            direction="column"
+                            justify="space-around"
+                            alignItems="flex-start"
                         >
                             <Grid item>
                                 <FormControl className={classes.formControl}>
@@ -136,38 +173,6 @@ const NewModel = ({classes, theme, ...props}) => {
                         </Grid>
                     </ModelWidget>
                 </Grid>
-                <Grid item lg={3} md={4} sm={6} xs={12}>
-                    <ModelWidget
-                        title="Payment"
-                        upperTitle
-                        bodyClass={classes.fullHeightBody}
-                        className={classes.card}
-                    >
-
-
-                        <Grid
-                            container
-                            direction="row"
-                            justify="space-between"
-                            alignItems="center"
-                        >
-                            <Grid item>
-                                <FormControl className={classes.formControl}>
-                                    <InputLabel htmlFor="currency">Currency</InputLabel>
-                                    <Input id="currency" value={props.payment_requirements.pay_for_model.unit}/>
-                                </FormControl>
-                            </Grid>
-                            <Grid item>
-                                <FormControl className={classes.formControl}>
-                                    <InputLabel htmlFor="total_pay">Amount</InputLabel>
-                                    <Input id="total_pay" value={props.payment_requirements.pay_for_model.value}
-                                           onChange={e => props.handleInput("payment_requirements", "total_pay", e)}/>
-                                </FormControl>
-                            </Grid>
-
-                        </Grid>
-                    </ModelWidget>
-                </Grid>
 
                 <div>
                     <Fab color="primary" aria-label="Add" className={classes.fab} onClick={props.handleCreateModel}>
@@ -181,6 +186,11 @@ const NewModel = ({classes, theme, ...props}) => {
 };
 
 const styles = theme => ({
+    textField: {
+    marginLeft: theme.spacing(1),
+    marginRight: theme.spacing(1),
+    width: 200,
+  },
     fab: {
         position: 'absolute',
         bottom: theme.spacing.unit * 10,

@@ -14,8 +14,15 @@ export const initialState = {
     model: null,
     fileName: "",
     file: null,
-    payment_requirements: payment_requirements.payment_requirements
-
+    payment_requirements: payment_requirements.payment_requirements,
+    modelFeatures: [
+        {
+            name: "name",
+            description: "description",
+            min: 0,
+            max: 1
+        }
+    ]
 };
 
 
