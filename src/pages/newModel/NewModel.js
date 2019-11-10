@@ -5,13 +5,11 @@ import ModelWidget from "../../components/ModelWidget";
 import PageTitle from "../../components/PageTitle";
 import AddIcon from '@material-ui/icons/Add';
 import { ToastContainer } from "react-toastify";
-
-
 import "react-toastify/dist/ReactToastify.css";
 
 const NewModel = ({classes, theme, ...props}) => {
-    console.log(props.selectedModelType)
     return (
+
         <React.Fragment>
             <PageTitle title="Create New Model"/>
             <ToastContainer autoClose={2000}/>
