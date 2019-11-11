@@ -24,8 +24,9 @@ export const initialState = {
     model: null,
     fileName: "",
     file: null,
+    modelFeatures: mapMockToModelFeatures(dataRequirements.dataRequirements.features),
     payment_requirements: payment_requirements.payment_requirements,
-    modelFeatures: mapMockToModelFeatures(dataRequirements.dataRequirements.features)
+    hyperparameter: ""
 };
 
 
@@ -127,10 +128,10 @@ const buildModelFormData = (name, selectedModelType, features, target, payment_r
 const buildModelFeatures = (modelFeatures) => {
     return {
         list: modelFeatures.map(feature => feature.name),
-        desc: modelFeatures.reduce((a, b) => {
+        desc: modelFeatures.reduce((acc, item) => {
             return {
-                ...a,
-                [b.name]: b.description
+                ...acc,
+                [item.name]: item.description
             }
         }, {}),
         range: [modelFeatures[0].min, modelFeatures[0].max],
