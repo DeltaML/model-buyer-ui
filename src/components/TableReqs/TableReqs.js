@@ -8,7 +8,7 @@ const TableReqs = ({classes, modelFeatures, ...props}) => {
 
         <Grid container direction="row">
 
-            <Grid item lg={11}> <Table className="mb-0">
+            <Grid item lg={11}> <Table className="mb-0" size="small">
                 <TableHead>
                     <TableRow>
                         <TableCell><b>Name</b></TableCell>
@@ -22,7 +22,7 @@ const TableReqs = ({classes, modelFeatures, ...props}) => {
                 <TableBody>
                     {modelFeatures.map((feature, index) => (
                         <TableRow>
-                            <TableCell>
+                            <TableCell style={{ width: '15%' }}>
                                 <TextField
                                     id="feature-name"
                                     className={classes.textField}
@@ -33,7 +33,7 @@ const TableReqs = ({classes, modelFeatures, ...props}) => {
 
 
                             </TableCell>
-                            <TableCell>
+                            <TableCell style={{ width: '55%' }}>
                                 <TextField
                                     id="feature-description"
                                     className={classes.textField}
@@ -41,9 +41,10 @@ const TableReqs = ({classes, modelFeatures, ...props}) => {
                                     multiline
                                     defaultValue={feature.description}
                                     onChange={e => props.handleInput(index, e, "description")}
+                                    fullWidth={true}
                                 />
                             </TableCell>
-                            <TableCell>
+                            <TableCell style={{ width: '15%' }}>
                                 <TextField
                                     id="feature-min"
                                     className={classes.textField}
@@ -53,21 +54,22 @@ const TableReqs = ({classes, modelFeatures, ...props}) => {
                                     onChange={e => props.handleInput(index, e, "min")}
                                 />
                             </TableCell>
-                            <TableCell><TextField
-                                id="feature-max"
-                                className={classes.textField}
-                                margin="normal"
-                                type="number"
-                                defaultValue={feature.max}
-                                onChange={e => props.handleInput(index, e, "max")}
-                            /></TableCell>
+                            <TableCell style={{ width: '15%' }}>
+                                <TextField
+                                    id="feature-max"
+                                    className={classes.textField}
+                                    margin="normal"
+                                    type="number"
+                                    defaultValue={feature.max}
+                                    onChange={e => props.handleInput(index, e, "max")}
+                                />
+                            </TableCell>
                         </TableRow>
                     ))}
                 </TableBody>
             </Table>
             </Grid>
             <Grid item lg={1}>
-
                 <Button variant="contained" size="small" color="primary" className={classes.margin}
                         onClick={props.addItem}>
                     Add

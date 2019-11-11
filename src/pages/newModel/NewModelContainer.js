@@ -19,6 +19,7 @@ export default compose(
             file: state.newModel.file,
             fileName: state.newModel.fileName,
             modelFeatures: state.newModel.modelFeatures,
+            modelTarget: state.newModel.modelTarget,
             payment_requirements: state.newModel.payment_requirements,
             hyperparameter: state.newModel.hyperparameter
         }),
@@ -40,6 +41,12 @@ export default compose(
         },
         handleUploadFile: props => (event) => {
             props.uploadFile(event.target.files)
+        },
+        handleInputTarget: props => (e, field) => {
+            props.modelTarget[field] = e.target.value;
+            props.setModelTarget(props.modelTarget)
+            props.addFeatureRequirement(props.modelFeatures)
+
         }
     }),
 

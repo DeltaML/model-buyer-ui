@@ -13,6 +13,14 @@ const mapMockToModelFeatures = (features) => {
     }));
 };
 
+const mapMockToModelTarget = (target) => {
+    return {
+        description: target.desc[0] || "",
+        min: target.range[0],
+        max: target.range[1]
+    };
+};
+
 export const initialState = {
     isLoading: false,
     error: null,
@@ -25,6 +33,7 @@ export const initialState = {
     fileName: "",
     file: null,
     modelFeatures: mapMockToModelFeatures(dataRequirements.dataRequirements.features),
+    modelTarget: mapMockToModelTarget(dataRequirements.dataRequirements.target),
     payment_requirements: payment_requirements.payment_requirements,
     hyperparameter: ""
 };
@@ -144,9 +153,17 @@ const buildModelFeatures = (modelFeatures) => {
     }
 };
 
-export const createModel = (props, name, selectedModelType, target, payment_requirements, modelFeatures) => async dispatch => {
+const buildModelTarget = (modelTarget) => {
+    return {
+        desc: modelTarget.description,
+        range: [modelTarget[0].min, modelTarget[0].max]
+    }
+};
+
+export const createModel = (props, name, selectedModelType, modelTarget, payment_requirements, modelFeatures) => async dispatch => {
     try {
         let features = buildModelFeatures(modelFeatures);
+        let target = buildModelTarget(modelTarget);
         const data = buildModelFormData(name, selectedModelType, features, target, payment_requirements);
         const modelCreateResponse = await post("models", data);
         toast.success("Model request created");
@@ -177,7 +194,6 @@ export const addFeatureRequirement = (list) => dispatch => {
         payload: list
     });
 };
-
 
 export default function NewModelReducer(state = initialState, action) {
     switch (action.type) {
@@ -264,14 +280,11 @@ export default function NewModelReducer(state = initialState, action) {
                     ...state.target,
                     desc: action.payload
                 }
-
-
             };
         case SELECT_MODEL_NAME:
             return {
                 ...state,
                 name: action.payload
-
             };
         case SELECT_TOTAL_PAY:
             return {
@@ -283,7 +296,6 @@ export default function NewModelReducer(state = initialState, action) {
                 ...state.payment_requirements.pay_for_model,
                 unit: action.payload
             };
-
         case ADD_FEATURE_ITEM:
             return {
                 ...state,

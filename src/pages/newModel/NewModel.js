@@ -1,5 +1,5 @@
 import React from "react";
-import {FormControl, Grid, Input, InputLabel, MenuItem, Select, TextField, withStyles} from "@material-ui/core";
+import {FormControl, Grid, Input, InputLabel, MenuItem, Select, Table, TableBody, TableCell, TableHead, TableRow, TextField, withStyles} from "@material-ui/core";
 import Fab from '@material-ui/core/Fab';
 import ModelWidget from "../../components/ModelWidget";
 import PageTitle from "../../components/PageTitle";
@@ -20,10 +20,10 @@ const NewModel = ({classes, theme, ...props}) => {
                 spacing={2}
             >
                 <Grid item container spacing={2} direction="row">
-                    <Grid item lg={7} md={7} sm={7} xs={12}>
+                    <Grid item lg={5} md={5} sm={5} xs={12}>
                         <ModelWidget
                             upperTitle
-                            title="Model "
+                            title="Model"
                             bodyClass={classes.fullHeightBody}
                             className={classes.card}
                         >
@@ -66,7 +66,7 @@ const NewModel = ({classes, theme, ...props}) => {
                             </Grid>
                         </ModelWidget>
                     </Grid>
-                    <Grid item lg={5} md={5} sm={5} xs={12}>
+                    <Grid item lg={3} md={3} sm={3} xs={12}>
                         <ModelWidget
                             title="Payment"
                             upperTitle
@@ -97,10 +97,58 @@ const NewModel = ({classes, theme, ...props}) => {
                             </Grid>
                         </ModelWidget>
                     </Grid>
+
+                    <Grid item lg={4} md={4} sm={4} xs={12}>
+                        <ModelWidget
+                            upperTitle
+                            title="Preprocessing"
+                            bodyClass={classes.fullHeightBody}
+                            className={classes.card}
+                        >
+                            <Grid
+                                container
+                                direction="row"
+                                justify="space-between"
+                                alignItems="center"
+                                spacing={3}
+                            >
+                                <Grid item lg={6} md={6} sm={6} xs={6}>
+                                    <FormControl fullWidth={true} className={classes.formControl}>
+                                        <InputLabel htmlFor="method">Method</InputLabel>
+                                        <Select
+                                            id={"methodSelect"}
+                                            required
+                                            value={props.features.pre_processing[0]["method"]}
+                                            fullWidth={true}
+                                        >
+                                            {(props.modelTypes.map(method => (
+                                                <MenuItem id={method} value={method}>{method}</MenuItem>
+                                            )))}
+                                        </Select>
+                                    </FormControl>
+                                </Grid>
+                                <Grid item lg={6} md={6} sm={6} xs={6}>
+                                    <FormControl fullWidth={true} className={classes.formControl}>
+                                        <InputLabel htmlFor="parameter">Parameters</InputLabel>
+                                        <Select
+                                            id={"parameter"}
+                                            required
+                                            value={props.features.pre_processing[0]["parameters"]}
+                                            fullWidth={true}
+                                        >
+                                            {(props.modelTypes.map(parameter => (
+                                                <MenuItem id={parameter} value={parameter}>{parameter}</MenuItem>
+                                            )))}
+                                        </Select>
+                                    </FormControl>
+                                </Grid>
+                            </Grid>
+                        </ModelWidget>
+                    </Grid>
                 </Grid>
 
                 <Grid item container spacing={2} direction="row">
-                    <Grid item lg={9} md={9} sm={9} xs={12}>
+                    <Grid item lg={12} md={12} sm={12} xs={12}>
                         <ModelWidget
                             title="Features"
                             upperTitle
@@ -111,7 +159,7 @@ const NewModel = ({classes, theme, ...props}) => {
                         </ModelWidget>
                     </Grid>
 
-                    <Grid item lg={3} md={3} sm={3} xs={12}>
+                    <Grid item lg={12} md={12} sm={12} xs={12}>
                         <ModelWidget
                             title="Target"
                             upperTitle
@@ -121,25 +169,56 @@ const NewModel = ({classes, theme, ...props}) => {
                             <Grid
                                 container
                                 direction="row"
-                                justify="space-evenly"
+                                justify="flex-start"
                                 alignItems="flex-start"
                                 spacing={3}
                             >
-                                <Grid item lg={12} md={12} sm={12} xs={12}>
-                                    <FormControl fullWidth={true} className={classes.formControl}>
-                                        <InputLabel htmlFor="target-range">Range</InputLabel>
-                                        <Input id="target-range" value={props.target.range}
-                                               onChange={e => props.handleCSVInput("target", "range", e)}/>
-                                    </FormControl>
+                                <Grid item lg={11}>
+                                    <Table className="mb-0" size="small">
+                                        <TableHead>
+                                            <TableRow>
+                                                <TableCell><b>Description</b></TableCell>
+                                                <TableCell><b>Min Value</b></TableCell>
+                                                <TableCell><b>Max Value</b></TableCell>
+                                            </TableRow>
+                                        </TableHead>
+                                        <TableBody>
+                                            <TableCell style={{ width: '70%' }}>
+                                                <TextField
+                                                    id="target-desc"
+                                                    className={classes.textField2}
+                                                    margin="normal"
+                                                    multiline
+                                                    defaultValue={props.target.desc[0]}
+                                                    onChange={e => props.handleInput("target", "desc", e)}
+                                                    fullWidth={true}
+                                                />
+                                            </TableCell>
+                                            <TableCell style={{ width: '15%' }}>
+                                                <TextField
+                                                    id="target-min"
+                                                    className={classes.textField2}
+                                                    margin="normal"
+                                                    type="number"
+                                                    defaultValue={props.modelTarget.min}
+                                                    onChange={e => props.handleCSVInput("target", "range", e)}
+                                                    fullWidth={true}
+                                                />
+                                            </TableCell>
+                                            <TableCell style={{ width: '15%' }}>
+                                                <TextField
+                                                    id="target-max"
+                                                    className={classes.textField2}
+                                                    margin="normal"
+                                                    type="number"
+                                                    defaultValue={props.modelTarget.max}
+                                                    onChange={e => props.handleCSVInput("target", "range", e)}
+                                                    fullWidth={true}
+                                                />
+                                            </TableCell>
+                                        </TableBody>
+                                    </Table>
                                 </Grid>
-                                <Grid item lg={12} md={12} sm={12} xs={12}>
-                                    <FormControl fullWidth={true} className={classes.formControl}>
-                                        <InputLabel htmlFor="target-desc">Desc</InputLabel>
-                                        <Input multiline={true} rows={7} id="target-desc" value={JSON.stringify(props.target.desc[0], null,'\t')}
-                                               onChange={e => props.handleInput("target", "desc", e)}/>
-                                    </FormControl>
-                                </Grid>
-
                             </Grid>
                         </ModelWidget>
                     </Grid>
@@ -156,10 +235,14 @@ const NewModel = ({classes, theme, ...props}) => {
 
 const styles = theme => ({
     textField: {
-    marginLeft: theme.spacing(1),
-    marginRight: theme.spacing(1),
-    width: 200,
-  },
+        marginLeft: theme.spacing(1),
+        marginRight: theme.spacing(1),
+        width: 200,
+    },
+    textField2: {
+        marginLeft: theme.spacing(1),
+        marginRight: theme.spacing(1),
+    },
     fab: {
         position: 'fixed',
         bottom: theme.spacing.unit * 5,
