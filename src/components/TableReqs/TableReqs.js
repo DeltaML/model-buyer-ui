@@ -1,9 +1,11 @@
 import React from "react";
-import {Fab, Grid, Table, TableBody, TableCell, TableHead, TableRow, TextField} from "@material-ui/core";
-import AddIcon from '@material-ui/icons/Add';
 
-const TableReqsComponent = ({classes, ...props}) => {
+import {Button, Grid, Table, TableBody, TableCell, TableHead, TableRow, TextField} from "@material-ui/core";
+
+const TableReqs = ({classes, modelFeatures, ...props}) => {
+
     return (
+
         <Grid container direction="row">
 
             <Grid item lg={11}> <Table className="mb-0">
@@ -18,14 +20,15 @@ const TableReqsComponent = ({classes, ...props}) => {
                 </TableHead>
 
                 <TableBody>
-                    {props.rowsData.map(feature => (
+                    {modelFeatures.map((feature, index) => (
                         <TableRow>
                             <TableCell>
                                 <TextField
                                     id="feature-name"
                                     className={classes.textField}
                                     margin="normal"
-                                    //value={feature.name}
+                                    defaultValue={feature.name}
+                                    onChange={e => props.handleInput(index, e, "name")}
                                 />
 
 
@@ -36,7 +39,8 @@ const TableReqsComponent = ({classes, ...props}) => {
                                     className={classes.textField}
                                     margin="normal"
                                     multiline
-                                    //value={feature.description}
+                                    defaultValue={feature.description}
+                                    onChange={e => props.handleInput(index, e, "description")}
                                 />
                             </TableCell>
                             <TableCell>
@@ -45,7 +49,8 @@ const TableReqsComponent = ({classes, ...props}) => {
                                     className={classes.textField}
                                     margin="normal"
                                     type="number"
-                                    //value={feature.min}
+                                    defaultValue={feature.min}
+                                    onChange={e => props.handleInput(index, e, "min")}
                                 />
                             </TableCell>
                             <TableCell><TextField
@@ -53,22 +58,24 @@ const TableReqsComponent = ({classes, ...props}) => {
                                 className={classes.textField}
                                 margin="normal"
                                 type="number"
-                                //value={feature.max}
+                                defaultValue={feature.max}
+                                onChange={e => props.handleInput(index, e, "max")}
                             /></TableCell>
                         </TableRow>
                     ))}
-                 </TableBody>
+                </TableBody>
             </Table>
-        </Grid>
-        <Grid item lg={1}>
-            <Fab color="primary" aria-label="Add" className={classes.fab}
-                                   onClick={() => console.log("clicj")}>
-                <AddIcon/>
-            </Fab>
-        </Grid>
+            </Grid>
+            <Grid item lg={1}>
 
-    </Grid>
+                <Button variant="contained" size="small" color="primary" className={classes.margin}
+                        onClick={props.addItem}>
+                    Add
+                </Button>
+            </Grid>
+
+        </Grid>
     );
 };
 
-export default TableReqsComponent;
+export default TableReqs;

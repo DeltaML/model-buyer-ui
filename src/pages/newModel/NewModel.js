@@ -8,7 +8,7 @@ import {ToastContainer} from "react-toastify";
 
 
 import "react-toastify/dist/ReactToastify.css";
-import TableReqsComponent from "../home/components/Table/TableReqs";
+import TableReqs from "../../components/TableReqs";
 
 const NewModel = ({classes, theme, ...props}) => {
     return (
@@ -99,7 +99,8 @@ const NewModel = ({classes, theme, ...props}) => {
                         bodyClass={classes.fullHeightBody}
                         className={classes.card}
                     >
-                        <TableReqsComponent classes={classes.textField} rowsData={props.modelFeatures} />
+                        {/*<TableReqsComponent classes={classes.textField} rowsData={props.modelFeatures} />*/}
+                        <TableReqs classes={classes.textField} />
 
                      {/*   <Grid
 
