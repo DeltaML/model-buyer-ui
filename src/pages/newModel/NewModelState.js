@@ -1,7 +1,17 @@
 import dataRequirements from "./mock"
 import payment_requirements from "./mock"
 import {post} from "../../utils/ApiUtilities";
-import { toast } from "react-toastify";
+import {toast} from "react-toastify";
+
+
+const mapMockToModelFeatures = (features) => {
+    return features.list.map(val => ({
+        name: val,
+        description: features.desc[val] || "",
+        min: features.range[0],
+        max: features.range[1]
+    }));
+};
 
 export const initialState = {
     isLoading: false,
@@ -14,6 +24,7 @@ export const initialState = {
     model: null,
     fileName: "",
     file: null,
+    modelFeatures: mapMockToModelFeatures(dataRequirements.dataRequirements.features),
     payment_requirements: payment_requirements.payment_requirements,
     hyperparameter: ""
 };
@@ -34,7 +45,7 @@ export const LOAD_FILE_NAME = "NewModel/LOAD_FILE_NAME";
 export const SELECT_TOTAL_PAY = "NewModel/SELECT_TOTAL_PAY";
 export const SELECT_CURRENCY = "NewModel/SELECT_CURRENCY";
 export const SELECT_MODEL_NAME = "NewModel/SELECT_MODEL_NAME";
-
+export const ADD_FEATURE_ITEM = "NewModel/ADD_FEATURE_ITEM";
 
 export const createModelPending = () => ({
     type: CREATE_MODEL_PENDING
@@ -113,9 +124,29 @@ const buildModelFormData = (name, selectedModelType, features, target, payment_r
     };
 };
 
-export const createModel = (props, name, selectedModelType, features, target, payment_requirements) => async dispatch => {
-    console.log("Create Model");
+
+const buildModelFeatures = (modelFeatures) => {
+    return {
+        list: modelFeatures.map(feature => feature.name),
+        desc: modelFeatures.reduce((acc, item) => {
+            return {
+                ...acc,
+                [item.name]: item.description
+            }
+        }, {}),
+        range: [modelFeatures[0].min, modelFeatures[0].max],
+        pre_processing: [
+            {
+                "method": "standard",
+                "parameters": "mean"
+            }
+        ]
+    }
+};
+
+export const createModel = (props, name, selectedModelType, target, payment_requirements, modelFeatures) => async dispatch => {
     try {
+        let features = buildModelFeatures(modelFeatures);
         const data = buildModelFormData(name, selectedModelType, features, target, payment_requirements);
         const modelCreateResponse = await post("models", data);
         toast.success("Model request created");
@@ -137,6 +168,14 @@ export const selectModelType = (selectedModelType) => dispatch => {
 export const setInputValues = (input, field, value) => dispatch => {
     dispatch(updateInputSuccess(DISPATCH_REDUCE_TYPE_MAP[input][field], value))
 
+};
+
+
+export const addFeatureRequirement = (list) => dispatch => {
+    dispatch({
+        type: ADD_FEATURE_ITEM,
+        payload: list
+    });
 };
 
 
@@ -243,6 +282,12 @@ export default function NewModelReducer(state = initialState, action) {
             return {
                 ...state.payment_requirements.pay_for_model,
                 unit: action.payload
+            };
+
+        case ADD_FEATURE_ITEM:
+            return {
+                ...state,
+                modelFeatures: action.payload
             };
         default:
             return state;

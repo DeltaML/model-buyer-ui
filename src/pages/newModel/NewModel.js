@@ -1,11 +1,12 @@
 import React from "react";
-import {FormControl, Grid, Input, InputLabel, MenuItem, Select, withStyles} from "@material-ui/core";
+import {FormControl, Grid, Input, InputLabel, MenuItem, Select, TextField, withStyles} from "@material-ui/core";
 import Fab from '@material-ui/core/Fab';
 import ModelWidget from "../../components/ModelWidget";
 import PageTitle from "../../components/PageTitle";
 import AddIcon from '@material-ui/icons/Add';
-import { ToastContainer } from "react-toastify";
+import {ToastContainer} from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import TableReqs from "../../components/TableReqs";
 
 const NewModel = ({classes, theme, ...props}) => {
     return (
@@ -106,42 +107,7 @@ const NewModel = ({classes, theme, ...props}) => {
                             bodyClass={classes.fullHeightBody}
                             className={classes.card}
                         >
-                            <Grid
-                                container
-                                direction="row"
-                                justify="space-evenly"
-                                alignItems="flex-start"
-                                spacing={3}
-                            >
-                                <Grid item lg={9} md={9} sm={9} xs={9}>
-                                    <FormControl fullWidth={true} className={classes.formControl}>
-                                        <InputLabel htmlFor="features-list">List</InputLabel>
-                                        <Input id="features-list" value={props.features.list}
-                                               onChange={e => props.handleCSVInput("features", "list", e)}/>
-                                    </FormControl>
-                                </Grid>
-                                <Grid item lg={3} md={3} sm={3} xs={3}>
-                                    <FormControl fullWidth={true} className={classes.formControl}>
-                                        <InputLabel htmlFor="features-range">Range</InputLabel>
-                                        <Input id="features-range" value={props.features.range}
-                                               onChange={e => props.handleCSVInput("features", "range", e)}/>
-                                    </FormControl>
-                                </Grid>
-                                <Grid item lg={9} md={9} sm={9} xs={9}>
-                                    <FormControl fullWidth={true} className={classes.formControl}>
-                                        <InputLabel htmlFor="features-desc">Desc</InputLabel>
-                                        <Input id="features-desc" multiline={true} rows={7} value={JSON.stringify(props.features.desc,null,'\t')}
-                                               onChange={e => props.handleInput("features", "desc", e)}/>
-                                    </FormControl>
-                                </Grid>
-                                <Grid item lg={3} md={3} sm={3} xs={3}>
-                                    <FormControl fullWidth={true} className={classes.formControl}>
-                                        <InputLabel htmlFor="features-preProcessing">Pre Processing</InputLabel>
-                                        <Input multiline={true} rows={7} id="features-preProcessing" value={JSON.stringify(props.features.pre_processing[0],null,'\t')}
-                                               onChange={e => props.handleInput("features", "pre_processing", e)}/>
-                                    </FormControl>
-                                </Grid>
-                            </Grid>
+                             <TableReqs classes={classes.textField} />
                         </ModelWidget>
                     </Grid>
 
@@ -189,6 +155,11 @@ const NewModel = ({classes, theme, ...props}) => {
 };
 
 const styles = theme => ({
+    textField: {
+    marginLeft: theme.spacing(1),
+    marginRight: theme.spacing(1),
+    width: 200,
+  },
     fab: {
         position: 'fixed',
         bottom: theme.spacing.unit * 5,

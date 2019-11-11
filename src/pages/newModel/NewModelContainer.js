@@ -18,6 +18,7 @@ export default compose(
             error: state.newModel.error,
             file: state.newModel.file,
             fileName: state.newModel.fileName,
+            modelFeatures: state.newModel.modelFeatures,
             payment_requirements: state.newModel.payment_requirements,
             hyperparameter: state.newModel.hyperparameter
         }),
@@ -32,7 +33,7 @@ export default compose(
             props.setInputValues(input, field, event.target.value.split(","));
         },
         handleCreateModel: props => () => {
-            props.createModel(props, props.modelName, props.selectedModelType, props.features, props.target, props.payment_requirements);
+            props.createModel(props, props.modelName, props.selectedModelType, props.target, props.payment_requirements, props.modelFeatures);
         },
         handleSelect: props => (event) => {
             props.selectModelType(event.target.value)
