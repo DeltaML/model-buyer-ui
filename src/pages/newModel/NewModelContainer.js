@@ -2,8 +2,7 @@ import {compose, withHandlers} from "recompose";
 import {withRouter} from "react-router-dom";
 import NewModelView from "./NewModel";
 import {connect} from "react-redux";
-import {createModel, selectModelType,setInputValues, uploadFile} from "../newModel/NewModelState";
-
+import {createModel, initialState, selectModelType, setInputValues, uploadFile} from "../newModel/NewModelState";
 
 
 export default compose(
@@ -34,7 +33,7 @@ export default compose(
             props.setInputValues(input, field, event.target.value.split(","));
         },
         handleCreateModel: props => () => {
-            props.createModel(props, props.modelName, props.selectedModelType, props.target, props.payment_requirements, props.modelFeatures);
+            props.createModel(props, props.modelName, props.selectedModelType, props.modelTarget, props.payment_requirements, props.modelFeatures);
         },
         handleSelect: props => (event) => {
             props.selectModelType(event.target.value)

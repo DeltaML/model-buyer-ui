@@ -190,7 +190,7 @@ const NewModel = ({classes, theme, ...props}) => {
                                                     margin="normal"
                                                     multiline
                                                     defaultValue={props.target.desc[0]}
-                                                    onChange={e => props.handleInput(e, "desc")}
+                                                    onChange={e => props.handleInputTarget(e, "desc")}
                                                     fullWidth={true}
                                                 />
                                             </TableCell>
@@ -201,7 +201,7 @@ const NewModel = ({classes, theme, ...props}) => {
                                                     margin="normal"
                                                     type="number"
                                                     defaultValue={props.modelTarget.min}
-                                                    onChange={e => props.handleInput(e, "min")}
+                                                    onChange={e => props.handleInputTarget(e, "min")}
                                                     fullWidth={true}
                                                 />
                                             </TableCell>
@@ -212,7 +212,7 @@ const NewModel = ({classes, theme, ...props}) => {
                                                     margin="normal"
                                                     type="number"
                                                     defaultValue={props.modelTarget.max}
-                                                    onChange={e => props.handleInput(e, "max")}
+                                                    onChange={e => props.handleInputTarget(e, "max")}
                                                     fullWidth={true}
                                                 />
                                             </TableCell>

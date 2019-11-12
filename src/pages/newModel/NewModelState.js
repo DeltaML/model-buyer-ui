@@ -55,6 +55,7 @@ export const SELECT_TOTAL_PAY = "NewModel/SELECT_TOTAL_PAY";
 export const SELECT_CURRENCY = "NewModel/SELECT_CURRENCY";
 export const SELECT_MODEL_NAME = "NewModel/SELECT_MODEL_NAME";
 export const ADD_FEATURE_ITEM = "NewModel/ADD_FEATURE_ITEM";
+export const ADD_TARGET_ITEM = "NewModel/ADD_TARGET_ITEM";
 
 export const createModelPending = () => ({
     type: CREATE_MODEL_PENDING
@@ -156,7 +157,7 @@ const buildModelFeatures = (modelFeatures) => {
 const buildModelTarget = (modelTarget) => {
     return {
         desc: modelTarget.description,
-        range: [modelTarget[0].min, modelTarget[0].max]
+        range: [modelTarget.min, modelTarget.max]
     }
 };
 
@@ -170,11 +171,10 @@ export const createModel = (props, name, selectedModelType, modelTarget, payment
         props.history.push(`/app/model/${modelCreateResponse.model.id}`)
 
     } catch (e) {
+        console.log(e);
         toast.error("Error creating model");
         dispatch(createModelError());
     }
-
-
 };
 
 
@@ -300,6 +300,11 @@ export default function NewModelReducer(state = initialState, action) {
             return {
                 ...state,
                 modelFeatures: action.payload
+            };
+        case ADD_TARGET_ITEM:
+            return {
+                ...state,
+                modelTarget: action.payload
             };
         default:
             return state;
