@@ -43,8 +43,6 @@ export default compose(
         },
         handleInputTarget: props => (e, field) => {
             props.modelTarget[field] = e.target.value;
-            props.setModelTarget(props.modelTarget);
-            props.addTargetRequirement(props.modelTarget);
         }
     }),
 

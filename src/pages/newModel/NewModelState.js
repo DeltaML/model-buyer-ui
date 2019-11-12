@@ -136,6 +136,7 @@ const buildModelFormData = (name, selectedModelType, features, target, payment_r
 
 
 const buildModelFeatures = (modelFeatures) => {
+    let ranges = modelFeatures.flatMap(feature => [parseFloat(feature.min), parseFloat(feature.max)]);
     return {
         list: modelFeatures.map(feature => feature.name),
         desc: modelFeatures.reduce((acc, item) => {
@@ -144,7 +145,7 @@ const buildModelFeatures = (modelFeatures) => {
                 [item.name]: item.description
             }
         }, {}),
-        range: [modelFeatures[0].min, modelFeatures[0].max],
+        range: [Math.min(...ranges), Math.max(...ranges)],
         pre_processing: [
             {
                 "method": "standard",
@@ -157,7 +158,7 @@ const buildModelFeatures = (modelFeatures) => {
 const buildModelTarget = (modelTarget) => {
     return {
         desc: modelTarget.description,
-        range: [modelTarget.min, modelTarget.max]
+        range: [parseFloat(modelTarget.min), parseFloat(modelTarget.max)]
     }
 };
 
