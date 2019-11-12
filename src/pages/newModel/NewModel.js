@@ -121,8 +121,8 @@ const NewModel = ({classes, theme, ...props}) => {
                                             value={props.features.pre_processing[0]["method"]}
                                             fullWidth={true}
                                         >
-                                            {(props.modelTypes.map(method => (
-                                                <MenuItem id={method} value={method}>{method}</MenuItem>
+                                            {(props.features.pre_processing.map(preproc => (
+                                                <MenuItem id={preproc.method} value={preproc.method}>{preproc.method}</MenuItem>
                                             )))}
                                         </Select>
                                     </FormControl>
@@ -136,8 +136,8 @@ const NewModel = ({classes, theme, ...props}) => {
                                             value={props.features.pre_processing[0]["parameters"]}
                                             fullWidth={true}
                                         >
-                                            {(props.modelTypes.map(parameter => (
-                                                <MenuItem id={parameter} value={parameter}>{parameter}</MenuItem>
+                                            {(props.features.pre_processing.map(preproc => (
+                                                <MenuItem id={preproc.parameters} value={preproc.parameters}>{preproc.parameters}</MenuItem>
                                             )))}
                                         </Select>
                                     </FormControl>
@@ -190,7 +190,7 @@ const NewModel = ({classes, theme, ...props}) => {
                                                     margin="normal"
                                                     multiline
                                                     defaultValue={props.target.desc[0]}
-                                                    onChange={e => props.handleInput("target", "desc", e)}
+                                                    onChange={e => props.handleInput(e, "desc")}
                                                     fullWidth={true}
                                                 />
                                             </TableCell>
@@ -201,7 +201,7 @@ const NewModel = ({classes, theme, ...props}) => {
                                                     margin="normal"
                                                     type="number"
                                                     defaultValue={props.modelTarget.min}
-                                                    onChange={e => props.handleCSVInput("target", "range", e)}
+                                                    onChange={e => props.handleInput(e, "min")}
                                                     fullWidth={true}
                                                 />
                                             </TableCell>
@@ -212,7 +212,7 @@ const NewModel = ({classes, theme, ...props}) => {
                                                     margin="normal"
                                                     type="number"
                                                     defaultValue={props.modelTarget.max}
-                                                    onChange={e => props.handleCSVInput("target", "range", e)}
+                                                    onChange={e => props.handleInput(e, "max")}
                                                     fullWidth={true}
                                                 />
                                             </TableCell>
