@@ -19,11 +19,9 @@ export default compose(
             props.addFeatureRequirement(list)
         },
         handleInput: props => (index, e, field) => {
-
             props.modelFeatures[index][field] = e.target.value;
             props.setModelFeatures(props.modelFeatures)
             props.addFeatureRequirement(props.modelFeatures)
-
         }
     })
 )(TableReqs);

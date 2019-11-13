@@ -34,7 +34,12 @@ export default {
                 "sex": "sex of the patient",
                 "bmi": "body mass index of the patient",
                 "bp": "average blood pressure of the patient",
-                "s1 to s6": "Six blood serum measurements obtained for each patient"
+                "s1": "Blood serum measurement 1 obtained for each patient",
+                "s2": "Blood serum measurement 2 obtained for each patient",
+                "s3": "Blood serum measurement 3 obtained for each patient",
+                "s4": "Blood serum measurement 4 obtained for each patient",
+                "s5": "Blood serum measurement 5 obtained for each patient",
+                "s6": "Blood serum measurement 6 obtained for each patient",
             }
         },
         target: {

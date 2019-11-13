@@ -13,6 +13,14 @@ const mapMockToModelFeatures = (features) => {
     }));
 };
 
+const mapMockToModelTarget = (target) => {
+    return {
+        description: target.desc[0] || "",
+        min: target.range[0],
+        max: target.range[1]
+    };
+};
+
 export const initialState = {
     isLoading: false,
     error: null,
@@ -25,6 +33,7 @@ export const initialState = {
     fileName: "",
     file: null,
     modelFeatures: mapMockToModelFeatures(dataRequirements.dataRequirements.features),
+    modelTarget: mapMockToModelTarget(dataRequirements.dataRequirements.target),
     payment_requirements: payment_requirements.payment_requirements,
     hyperparameter: ""
 };
@@ -46,6 +55,7 @@ export const SELECT_TOTAL_PAY = "NewModel/SELECT_TOTAL_PAY";
 export const SELECT_CURRENCY = "NewModel/SELECT_CURRENCY";
 export const SELECT_MODEL_NAME = "NewModel/SELECT_MODEL_NAME";
 export const ADD_FEATURE_ITEM = "NewModel/ADD_FEATURE_ITEM";
+export const ADD_TARGET_ITEM = "NewModel/ADD_TARGET_ITEM";
 
 export const createModelPending = () => ({
     type: CREATE_MODEL_PENDING
@@ -126,6 +136,7 @@ const buildModelFormData = (name, selectedModelType, features, target, payment_r
 
 
 const buildModelFeatures = (modelFeatures) => {
+    let ranges = modelFeatures.flatMap(feature => [parseFloat(feature.min), parseFloat(feature.max)]);
     return {
         list: modelFeatures.map(feature => feature.name),
         desc: modelFeatures.reduce((acc, item) => {
@@ -134,7 +145,7 @@ const buildModelFeatures = (modelFeatures) => {
                 [item.name]: item.description
             }
         }, {}),
-        range: [modelFeatures[0].min, modelFeatures[0].max],
+        range: [Math.min(...ranges), Math.max(...ranges)],
         pre_processing: [
             {
                 "method": "standard",
@@ -144,20 +155,27 @@ const buildModelFeatures = (modelFeatures) => {
     }
 };
 
-export const createModel = (props, name, selectedModelType, target, payment_requirements, modelFeatures) => async dispatch => {
+const buildModelTarget = (modelTarget) => {
+    return {
+        desc: modelTarget.description,
+        range: [parseFloat(modelTarget.min), parseFloat(modelTarget.max)]
+    }
+};
+
+export const createModel = (props, name, selectedModelType, modelTarget, payment_requirements, modelFeatures) => async dispatch => {
     try {
         let features = buildModelFeatures(modelFeatures);
+        let target = buildModelTarget(modelTarget);
         const data = buildModelFormData(name, selectedModelType, features, target, payment_requirements);
         const modelCreateResponse = await post("models", data);
         toast.success("Model request created");
         props.history.push(`/app/model/${modelCreateResponse.model.id}`)
 
     } catch (e) {
+        console.log(e);
         toast.error("Error creating model");
         dispatch(createModelError());
     }
-
-
 };
 
 
@@ -177,7 +195,6 @@ export const addFeatureRequirement = (list) => dispatch => {
         payload: list
     });
 };
-
 
 export default function NewModelReducer(state = initialState, action) {
     switch (action.type) {
@@ -264,14 +281,11 @@ export default function NewModelReducer(state = initialState, action) {
                     ...state.target,
                     desc: action.payload
                 }
-
-
             };
         case SELECT_MODEL_NAME:
             return {
                 ...state,
                 name: action.payload
-
             };
         case SELECT_TOTAL_PAY:
             return {
@@ -283,11 +297,15 @@ export default function NewModelReducer(state = initialState, action) {
                 ...state.payment_requirements.pay_for_model,
                 unit: action.payload
             };
-
         case ADD_FEATURE_ITEM:
             return {
                 ...state,
                 modelFeatures: action.payload
+            };
+        case ADD_TARGET_ITEM:
+            return {
+                ...state,
+                modelTarget: action.payload
             };
         default:
             return state;

@@ -16,7 +16,7 @@ const Profile = ({classes, theme, ...props}) => {
             <ToastContainer autoClose={2000}/>
 
             <Grid container spacing={2}>
-                <Grid item lg={3} md={4} sm={6} xs={12}>
+                <Grid item lg={4} md={4} sm={6} xs={12}>
                     <ModelWidget
                         upperTitle
                         title="User data"
@@ -29,30 +29,33 @@ const Profile = ({classes, theme, ...props}) => {
                             justify="space-between"
                             alignItems="center"
                         >
-                            <Grid item>
-                                <FormControl className={classes.formControl}>
+                            <Grid item lg={12} md={12} sm={12} xs={12}>
+                                <FormControl fullWidth={true} className={classes.formControl}>
                                     <InputLabel htmlFor="name">Name</InputLabel>
                                     <Input id="name"
                                            disabled
                                            value={props.name}
-                                           onChange={e => props.handleNameInput(e)}/>
+                                           onChange={e => props.handleNameInput(e)}
+                                           fullWidth={true}
+                                    />
                                 </FormControl>
 
                             </Grid>
-                            <Grid item>
-                                <FormControl className={classes.formControl}>
+                            <Grid item lg={12} md={12} sm={12} xs={12}>
+                                <FormControl fullWidth={true}  className={classes.formControl}>
                                     <InputLabel htmlFor="email">Email</InputLabel>
                                     <Input id="email"
                                            disabled
                                            value={props.email}
-                                           onChange={e => props.handleEmailInput(e)}/>
+                                           onChange={e => props.handleEmailInput(e)}
+                                            fullWidth={true}
+                                    />
                                 </FormControl>
-
                             </Grid>
                         </Grid>
                     </ModelWidget>
                 </Grid>
-                <Grid item lg={3} md={4} sm={6} xs={12}>
+                <Grid item lg={5} md={5} sm={5} xs={12}>
                     <ModelWidget
                         title="Address Data"
                         upperTitle
@@ -65,15 +68,16 @@ const Profile = ({classes, theme, ...props}) => {
                             justify="space-between"
                             alignItems="center"
                         >
-                            <Grid item>
-                                <FormControl className={classes.formControl}>
+                            <Grid item lg={12} md={12} sm={12} xs={12}>
+                                <FormControl fullWidth={true} className={classes.formControl}>
                                     <InputLabel htmlFor="address">Address</InputLabel>
                                     <Input id="Address"
                                            value={props.address}
-                                           onChange={e => props.handleAddressInput(e)}/>
+                                           onChange={e => props.handleAddressInput(e)}
+                                            fullWidth={true}
+                                    />
                                 </FormControl>
                             </Grid>
-
                         </Grid>
                     </ModelWidget>
                 </Grid>
